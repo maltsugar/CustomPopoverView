@@ -43,7 +43,7 @@ view.content = btn;
     [view showFrom:_rightBtn alignStyle:CPAlignStyleRight];
 </code></pre>
 
-### normal use(only needs a array of titles)
+### normal use(only needs an array of titles)
 <pre><code>
 	_titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
 	CustomPopOverView *view = [[CustomPopOverView 	alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) 	titleMenus:_titles];;
