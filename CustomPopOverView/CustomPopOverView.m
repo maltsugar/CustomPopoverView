@@ -242,14 +242,14 @@
     
     CGRect contentFrame = content.frame;
     
-    contentFrame.origin.x = 5;
-    contentFrame.origin.y = kTriangleHeight + 5;
+    contentFrame.origin.x = kRoundMargin;
+    contentFrame.origin.y = kTriangleHeight + kRoundMargin;
     content.frame = contentFrame;
     
     
     CGRect  temp = self.containerView.frame;
-    temp.size.width = CGRectGetMaxX(contentFrame) + 5; // left and right space are 2.0
-    temp.size.height = CGRectGetMaxY(contentFrame) + 5;
+    temp.size.width = CGRectGetMaxX(contentFrame) + kRoundMargin; // left and right space
+    temp.size.height = CGRectGetMaxY(contentFrame) + kRoundMargin;
     
     self.containerView.frame = temp;
     
