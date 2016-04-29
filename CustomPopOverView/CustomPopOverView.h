@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 #define kTriangleWidth 10.0
 #define kPopOverLayerCornerRadius 5.0
 
-#define kRoundMargin 0.0
+#define kRoundMargin 5.0
 
 @class CustomPopOverView;
 @protocol CustomPopOverViewDelegate <NSObject>
