@@ -4,6 +4,7 @@ This custom popover view, you can give an array of menu titles for normal use. I
 
 ##The preview chart is as follows
 ![demo](http://ww3.sinaimg.cn/mw690/72aba7efgw1f3ch00wwwxg20al0j3gqp.gif)
+![demo2](http://ww2.sinaimg.cn/mw690/72aba7efgw1f3dcknlfphg20am0j3dm6.gif)
 
 ##How to use
 ### custom view
@@ -61,6 +62,7 @@ view.content = btn;
 
 ##预览图如下
 ![预览图](http://ww3.sinaimg.cn/mw690/72aba7efgw1f3ch00wwwxg20al0j3gqp.gif)
+![demo2](http://ww2.sinaimg.cn/mw690/72aba7efgw1f3dcknlfphg20am0j3dm6.gif)
 
 ##用法
 
