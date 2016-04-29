@@ -138,6 +138,22 @@
     [self setLayerFrame:self.frame];
 }
 
+- (void)didMoveToSuperview
+{
+    [super didMoveToSuperview];
+    
+    
+    // animations support
+    self.transform = CGAffineTransformMakeScale(1.1,1.1);
+    self.alpha = 0;
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.2];
+    self.transform = CGAffineTransformMakeScale(1.0,1.0);
+    self.alpha = 1;
+    [UIView commitAnimations];
+}
+
 
 - (void)dealloc
 {
@@ -203,12 +219,13 @@
     return self;
 }
 
-
+#pragma mark- set background color
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+//        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -316,9 +333,21 @@
     }
 }
 
+
+
 - (void)dismiss
 {
-    [self removeFromSuperview];
+    
+    // animations support
+    [UIView animateWithDuration:0.2 animations:^{
+        self.containerView.transform = CGAffineTransformMakeScale(0.9,0.9);
+        self.containerView.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.containerView.hidden = YES;
+        [self removeFromSuperview];
+    }];
+    
+    
     
     if ([self.delegate respondsToSelector:@selector(popOverViewDidDismiss:)]) {
         [self.delegate popOverViewDidDismiss:self];
