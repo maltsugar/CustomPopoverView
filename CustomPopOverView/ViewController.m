@@ -9,6 +9,10 @@
 #import "ViewController.h"
 #import "CustomPopOverView.h"
 
+
+#define RGBCOLOR(r,g,b)		[UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define UIColorFromHex(hexValue) [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0xFF00) >> 8))/255.0 blue:((float)(hexValue & 0xFF))/255.0 alpha:1.0]
+
 @interface ViewController () <CustomPopOverViewDelegate>
 {
     UIButton *_rightBtn;
@@ -24,10 +28,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    [rightBtn addTarget:self action:@selector(handleRightClick) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-    _rightBtn = rightBtn;
+//    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//    [rightBtn addTarget:self action:@selector(handleRightClick) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+//    _rightBtn = rightBtn;
+    
+    self.navigationController.navigationBar.barTintColor = UIColorFromHex(0x222222); // 背景色
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor]; // items字体色
+    self.navigationController.navigationBar.titleTextAttributes = @{
+                                                                    NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                                    NSFontAttributeName: [UIFont systemFontOfSize:18.0f]
+                                                                    };
+
+    
     
     
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
@@ -35,9 +49,40 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:leftBtn];
     _leftBtn = leftBtn;
     
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame= CGRectMake(0, 0, 40, 40);
+    [btn setImage:[UIImage imageNamed:@"option"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(optionClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    
+    UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn1.frame= CGRectMake(0, 0, 40, 40);
+    [btn1 setImage:[UIImage imageNamed:@"ger_add"] forState:UIControlStateNormal];
+//    [btn1 addTarget:self action:@selector(addClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btn_right1 = [[UIBarButtonItem alloc] initWithCustomView:btn1];
+    
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spacer.width = -5;
+    
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:spacer, btn_right, btn_right1, nil];
+    
 }
 
-- (void)handleRightClick {
+- (void)optionClick:(UIButton *)sender
+{
+    
+    NSArray *menus = @[@"清空已完成", @"清空全部"];
+    CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 100, 44*2) titleMenus:menus];
+    pView.delegate = self;
+    pView.containerBackgroudColor = RGBCOLOR(64, 64, 64);
+    [pView showFrom:sender alignStyle:CPAlignStyleRight];
+
+
+}
+
+- (void)handleLeftClick {
+    
     UIViewController *vc = [[UIViewController alloc]init];
     vc.view.backgroundColor = [UIColor yellowColor];
     vc.view.frame = CGRectMake(0, 0, 200, 200);
@@ -47,19 +92,10 @@
     lab.numberOfLines = 0;
     [vc.view addSubview:lab];
     
-
+    
     CustomPopOverView *view = [CustomPopOverView popOverView];
     view.contentViewController = vc;
     
-    [view showFrom:_rightBtn alignStyle:CPAlignStyleRight];
-
-
-}
-
-- (void)handleLeftClick {
-    CustomPopOverView *view = [CustomPopOverView popOverView];
-    view.content = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
-    view.containerBackgroudColor = [UIColor blueColor];
     [view showFrom:_leftBtn alignStyle:CPAlignStyleLeft];
     
     
@@ -98,7 +134,8 @@
 
 - (void)popOverView:(CustomPopOverView *)pView didClickMenuIndex:(NSInteger)index
 {
-    NSLog(@"select menu title is: %@", _titles[index]);
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"index is %d", (int)index] message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end

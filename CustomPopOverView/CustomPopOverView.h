@@ -14,11 +14,17 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 };
 
 
+// 小三角的高度
 #define kTriangleHeight 8.0
+
+// 小三角的宽度
 #define kTriangleWidth 10.0
+
+// 弹出视图背景的圆角半径
 #define kPopOverLayerCornerRadius 5.0
 
-#define kRoundMargin 5.0
+// 调整弹出视图背景四周的空隙
+#define kRoundMargin 10.0
 
 @class CustomPopOverView;
 @protocol CustomPopOverViewDelegate <NSObject>
@@ -28,6 +34,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 - (void)popOverViewDidDismiss:(CustomPopOverView *)pView;
 
 // for normal use
+// 普通用法（点击菜单）的回调
 - (void)popOverView:(CustomPopOverView *)pView didClickMenuIndex:(NSInteger)index;
 
 
@@ -49,6 +56,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 + (instancetype)popOverView;
 
 // for normal use, you can set titles, it will show as a tableview
+// 简单使用的话，直接传一组菜单，会以tableview的形式展示，可以自己修改tableview属性
 - (instancetype)initWithBounds:(CGRect)bounds titleMenus:(NSArray *)titles;
 
 

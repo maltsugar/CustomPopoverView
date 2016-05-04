@@ -25,8 +25,8 @@
                                     <action selector="testClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Veu-vI-UdI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SgM-C9-Qc9">
-                                <rect key="frame" x="163" y="150" width="36" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SgM-C9-Qc9">
+                                <rect key="frame" x="158" y="150" width="36" height="30"/>
                                 <state key="normal" title="test2"/>
                                 <connections>
                                     <action selector="testClick2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uok-Gi-Suw"/>

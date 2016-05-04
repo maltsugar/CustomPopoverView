@@ -198,6 +198,9 @@
 {
     if (nil == _table) {
         _table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+//        _table.backgroundView = nil;
+//        _table.backgroundColor = [UIColor clearColor];
+//        _table.separatorColor = [UIColor whiteColor];
         _table.tableFooterView = [UIView new];
     }
     return _table;
@@ -215,6 +218,18 @@
         self.table.dataSource = self;
         
         [self setContent:self.table];
+        
+        _table.scrollEnabled = NO;
+        if ([_table respondsToSelector:@selector(setSeparatorInset:)]) {
+            //让线头不留白
+            [_table setSeparatorInset:UIEdgeInsetsZero];
+            
+        }
+        if ([_table respondsToSelector:@selector(setLayoutMargins:)]) {
+            
+            [_table setLayoutMargins:UIEdgeInsetsZero];
+            
+        }
     }
     return self;
 }
@@ -370,8 +385,15 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (nil == cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.contentView.backgroundColor = [UIColor clearColor];
     }
+    
+    
     cell.textLabel.text = self.titleMenus[indexPath.row];
+//    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     return cell;
 }
 
@@ -380,6 +402,24 @@
     if ([self.delegate respondsToSelector:@selector(popOverView:didClickMenuIndex:)]) {
         [self.delegate popOverView:self didClickMenuIndex:indexPath.row];
     }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+        
+    }
+    
 }
 @end
 
