@@ -53,7 +53,7 @@ view.content = btn;
 	[view showFrom:sender alignStyle:CPAlignStyleCenter];
 </code></pre>
 
-### if you have any question welcome to issue me，hope you like it!
+### if you have any question welcome to issue to me，hope you like it!
 
 <hr>
 
