@@ -256,6 +256,7 @@
     _config.defaultRowHeight = 44.f;
     _config.tableBackgroundColor = [UIColor whiteColor];
     _config.separatorColor = [UIColor blackColor];
+    _config.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _config.textColor = [UIColor blackColor];
     _config.font = [UIFont systemFontOfSize:14.0];
 }
@@ -402,7 +403,7 @@
         _table.backgroundColor = _config.tableBackgroundColor;
         _table.separatorColor = _config.separatorColor;
         _table.rowHeight = _config.defaultRowHeight;
-        
+        _table.separatorStyle = _config.separatorStyle;
         _table.tableFooterView = [UIView new];
     }
     return _table;

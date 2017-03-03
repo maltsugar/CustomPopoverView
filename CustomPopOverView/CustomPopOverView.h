@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 @property (nonatomic, strong) UIColor *separatorColor;
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, strong) UIFont *font;
-
+@property (nonatomic, assign) UITableViewCellSeparatorStyle separatorStyle;
 
 
 @end
