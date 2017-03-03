@@ -9,6 +9,10 @@
 #import "CustomPopOverView.h"
 
 
+@implementation PopOverVieConfiguration
+@end
+
+
 // custom containerView
 
 @interface PopOverContainerView : UIView
@@ -16,26 +20,23 @@
 @property (nonatomic, strong) CAShapeLayer *popLayer;
 @property (nonatomic, assign) CGFloat  apexOftriangelX;
 @property (nonatomic, strong) UIColor *layerColor;
-
+@property (nonatomic, strong) PopOverVieConfiguration *config;
 
 @end
 
 @implementation PopOverContainerView
 
-
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithConfig:(PopOverVieConfiguration *)config
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
         // monitor frame property
         [self addObserver:self forKeyPath:@"frame" options:0 context:NULL];
-        
-        
-        
+        _config = config;
     }
-   
     return self;
 }
+
 - (CAShapeLayer *)popLayer
 {
     if (nil == _popLayer) {
@@ -72,28 +73,28 @@
     
     
     // triangel must between left corner and right corner
-    if (apexOfTriangelX > frame.size.width - kPopOverLayerCornerRadius) {
-        apexOfTriangelX = frame.size.width - kPopOverLayerCornerRadius - 0.5 * kTriangleWidth;
-    }else if (apexOfTriangelX < kPopOverLayerCornerRadius) {
-        apexOfTriangelX = kPopOverLayerCornerRadius + 0.5 * kTriangleWidth;
+    if (apexOfTriangelX > frame.size.width - _config.containerViewCornerRadius) {
+        apexOfTriangelX = frame.size.width - _config.containerViewCornerRadius - 0.5 * _config.triAngelWidth;
+    }else if (apexOfTriangelX < _config.containerViewCornerRadius) {
+        apexOfTriangelX = _config.containerViewCornerRadius + 0.5 * _config.triAngelWidth;
     }
     
     
     CGPoint point0 = CGPointMake(apexOfTriangelX, 0);
-    CGPoint point1 = CGPointMake(apexOfTriangelX - 0.5 * kTriangleWidth, kTriangleHeight);
-    CGPoint point2 = CGPointMake(kPopOverLayerCornerRadius, kTriangleHeight);
-    CGPoint point2_center = CGPointMake(kPopOverLayerCornerRadius, kTriangleHeight + kPopOverLayerCornerRadius);
+    CGPoint point1 = CGPointMake(apexOfTriangelX - 0.5 * _config.triAngelWidth, _config.triAngelHeight);
+    CGPoint point2 = CGPointMake(_config.containerViewCornerRadius, _config.triAngelHeight);
+    CGPoint point2_center = CGPointMake(_config.containerViewCornerRadius, _config.triAngelHeight + _config.containerViewCornerRadius);
     
-    CGPoint point3 = CGPointMake(0, frame.size.height - kPopOverLayerCornerRadius);
-    CGPoint point3_center = CGPointMake(kPopOverLayerCornerRadius, frame.size.height - kPopOverLayerCornerRadius);
+    CGPoint point3 = CGPointMake(0, frame.size.height - _config.containerViewCornerRadius);
+    CGPoint point3_center = CGPointMake(_config.containerViewCornerRadius, frame.size.height - _config.containerViewCornerRadius);
     
-    CGPoint point4 = CGPointMake(frame.size.width - kPopOverLayerCornerRadius, frame.size.height);
-    CGPoint point4_center = CGPointMake(frame.size.width - kPopOverLayerCornerRadius, frame.size.height - kPopOverLayerCornerRadius);
+    CGPoint point4 = CGPointMake(frame.size.width - _config.containerViewCornerRadius, frame.size.height);
+    CGPoint point4_center = CGPointMake(frame.size.width - _config.containerViewCornerRadius, frame.size.height - _config.containerViewCornerRadius);
     
-    CGPoint point5 = CGPointMake(frame.size.width, kTriangleHeight + kPopOverLayerCornerRadius);
-    CGPoint point5_center = CGPointMake(frame.size.width - kPopOverLayerCornerRadius, kTriangleHeight + kPopOverLayerCornerRadius);
+    CGPoint point5 = CGPointMake(frame.size.width, _config.triAngelHeight + _config.containerViewCornerRadius);
+    CGPoint point5_center = CGPointMake(frame.size.width - _config.containerViewCornerRadius, _config.triAngelHeight + _config.containerViewCornerRadius);
     
-    CGPoint point6 = CGPointMake(apexOfTriangelX + 0.5 * kTriangleWidth, kTriangleHeight);
+    CGPoint point6 = CGPointMake(apexOfTriangelX + 0.5 * _config.triAngelWidth, _config.triAngelHeight);
     
     
     
@@ -102,16 +103,16 @@
     [path moveToPoint:point0];
     [path addLineToPoint:point1];
     [path addLineToPoint:point2];
-    [path addArcWithCenter:point2_center radius:kPopOverLayerCornerRadius startAngle:3*M_PI_2 endAngle:M_PI clockwise:NO];
+    [path addArcWithCenter:point2_center radius:_config.containerViewCornerRadius startAngle:3*M_PI_2 endAngle:M_PI clockwise:NO];
     
     [path addLineToPoint:point3];
-    [path addArcWithCenter:point3_center radius:kPopOverLayerCornerRadius startAngle:M_PI endAngle:M_PI_2 clockwise:NO];
+    [path addArcWithCenter:point3_center radius:_config.containerViewCornerRadius startAngle:M_PI endAngle:M_PI_2 clockwise:NO];
     
     [path addLineToPoint:point4];
-    [path addArcWithCenter:point4_center radius:kPopOverLayerCornerRadius startAngle:M_PI_2 endAngle:0 clockwise:NO];
+    [path addArcWithCenter:point4_center radius:_config.containerViewCornerRadius startAngle:M_PI_2 endAngle:0 clockwise:NO];
     
     [path addLineToPoint:point5];
-    [path addArcWithCenter:point5_center radius:kPopOverLayerCornerRadius startAngle:0 endAngle:3*M_PI_2 clockwise:NO];
+    [path addArcWithCenter:point5_center radius:_config.containerViewCornerRadius startAngle:0 endAngle:3*M_PI_2 clockwise:NO];
     
     [path addLineToPoint:point6];
     [path closePath];
@@ -184,33 +185,42 @@
 
 @implementation CustomPopOverView
 
-- (PopOverContainerView *)containerView
++ (instancetype)popOverView
 {
-    if (nil == _containerView) {
-        _containerView = [[PopOverContainerView alloc]init];
-        [self addSubview:_containerView];
-    }
-    
-    return _containerView;
+    return [[self alloc]init];
 }
 
-- (UITableView *)table
+- (instancetype)init
 {
-    if (nil == _table) {
-        _table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
-//        _table.backgroundView = nil;
-//        _table.backgroundColor = [UIColor clearColor];
-//        _table.separatorColor = [UIColor whiteColor];
-        _table.tableFooterView = [UIView new];
+    self = [super init];
+    if (self) {
+        [self initDefaultConfig];
     }
-    return _table;
+    return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initDefaultConfig];
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+//        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
 
-- (instancetype)initWithBounds:(CGRect)bounds titleMenus:(NSArray *)titles
+- (instancetype)initWithBounds:(CGRect)bounds titleMenus:(NSArray *)titles config:(PopOverVieConfiguration *)config
 {
     self = [super initWithFrame:bounds];
     if (self) {
+        if (!config) {
+            [self initDefaultConfig];
+        }else
+        {
+            _config = config;
+        }
+        
         self.titleMenus = titles;
         
         self.table.frame = CGRectMake(0, 0, CGRectGetWidth(bounds), CGRectGetHeight(bounds));
@@ -234,22 +244,21 @@
     return self;
 }
 
-#pragma mark- set background color
-- (instancetype)initWithFrame:(CGRect)frame
+- (void)initDefaultConfig
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
-//        self.backgroundColor = [UIColor clearColor];
-    }
-    return self;
+    _config = [PopOverVieConfiguration new];
+    _config.triAngelHeight = 8.0;
+    _config.triAngelWidth = 10.0;
+    _config.containerViewCornerRadius = 5.0;
+    _config.roundMargin = 10.0;
+    
+    // 普通用法
+    _config.defaultRowHeight = 44.f;
+    _config.tableBackgroundColor = [UIColor whiteColor];
+    _config.separatorColor = [UIColor blackColor];
+    _config.textColor = [UIColor blackColor];
+    _config.font = [UIFont systemFontOfSize:14.0];
 }
-
-+ (instancetype)popOverView
-{
-    return [[self alloc]init];
-}
-
 
 - (void)setContent:(UIView *)content
 {
@@ -257,14 +266,14 @@
     
     CGRect contentFrame = content.frame;
     
-    contentFrame.origin.x = kRoundMargin;
-    contentFrame.origin.y = kTriangleHeight + kRoundMargin;
+    contentFrame.origin.x = _config.roundMargin;
+    contentFrame.origin.y = _config.triAngelHeight + _config.roundMargin;
     content.frame = contentFrame;
     
     
     CGRect  temp = self.containerView.frame;
-    temp.size.width = CGRectGetMaxX(contentFrame) + kRoundMargin; // left and right space
-    temp.size.height = CGRectGetMaxY(contentFrame) + kRoundMargin;
+    temp.size.width = CGRectGetMaxX(contentFrame) + _config.roundMargin; // left and right space
+    temp.size.height = CGRectGetMaxY(contentFrame) + _config.roundMargin;
     
     self.containerView.frame = temp;
     
@@ -374,6 +383,33 @@
     [self dismiss];
 }
 
+#pragma mark- lazy
+- (PopOverContainerView *)containerView
+{
+    if (nil == _containerView) {
+        _containerView = [[PopOverContainerView alloc]initWithConfig:_config];
+        [self addSubview:_containerView];
+    }
+    
+    return _containerView;
+}
+
+- (UITableView *)table
+{
+    if (nil == _table) {
+        _table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+        //        _table.backgroundView = nil;
+        _table.backgroundColor = _config.tableBackgroundColor;
+        _table.separatorColor = _config.separatorColor;
+        _table.rowHeight = _config.defaultRowHeight;
+        
+        _table.tableFooterView = [UIView new];
+    }
+    return _table;
+}
+
+
+
 #pragma mark- <UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -389,10 +425,9 @@
         cell.contentView.backgroundColor = [UIColor clearColor];
     }
     
-    
     cell.textLabel.text = self.titleMenus[indexPath.row];
-//    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+    cell.textLabel.textColor = _config.textColor;
+    cell.textLabel.font = _config.font;
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     return cell;
 }
@@ -421,6 +456,7 @@
     }
     
 }
+
 @end
 
 
