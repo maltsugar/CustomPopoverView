@@ -47,7 +47,17 @@ view.content = btn;
 ### normal use(only needs an array of titles)
 <pre><code>
 	_titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
-	CustomPopOverView *view = [[CustomPopOverView 	alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) 	titleMenus:_titles];;
+	PopOverVieConfiguration *config = [PopOverVieConfiguration new];
+    config.triAngelHeight = 5.0;
+    config.triAngelWidth = 7.0;
+    config.containerViewCornerRadius = 3.0;
+    config.roundMargin = 2.0;
+    config.defaultRowHeight = 30;
+    config.tableBackgroundColor = [UIColor grayColor];
+    config.textColor = [UIColor orangeColor];
+	
+	
+	CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) titleMenus:_titles config:config];
 	view.containerBackgroudColor = [UIColor blueColor];
 	view.delegate = self;
 	[view showFrom:sender alignStyle:CPAlignStyleCenter];
@@ -109,7 +119,17 @@ view.content = btn;
 ### 普通用法（只传一组菜单名称）
 <pre><code>
 	_titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
-	CustomPopOverView *view = [[CustomPopOverView 	alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) 	titleMenus:_titles];;
+	PopOverVieConfiguration *config = [PopOverVieConfiguration new];
+    config.triAngelHeight = 5.0;
+    config.triAngelWidth = 7.0;
+    config.containerViewCornerRadius = 3.0;
+    config.roundMargin = 2.0;
+    config.defaultRowHeight = 30;
+    config.tableBackgroundColor = [UIColor grayColor];
+    config.textColor = [UIColor orangeColor];
+	
+	
+	CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) titleMenus:_titles config:config];
 	view.containerBackgroudColor = [UIColor blueColor];
 	view.delegate = self;
 	[view showFrom:sender alignStyle:CPAlignStyleCenter];

@@ -114,7 +114,7 @@
     config.textColor = [UIColor orangeColor];
     
     
-    CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) titleMenus:_titles config:config];;
+    CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) titleMenus:_titles config:config];
     view.containerBackgroudColor = [UIColor blueColor];
     view.delegate = self;
     [view showFrom:sender alignStyle:CPAlignStyleCenter];
