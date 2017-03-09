@@ -21,7 +21,6 @@
 @property (nonatomic, assign) CGFloat  apexOftriangelX;
 @property (nonatomic, strong) UIColor *layerColor;
 @property (nonatomic, strong) PopOverVieConfiguration *config;
-
 @end
 
 @implementation PopOverContainerView
@@ -179,6 +178,8 @@
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSArray *titleMenus;
 
+@property (nonatomic, assign) CPAlignStyle alignStyle;
+@property (nonatomic,   weak) UIView *showFrom;
 
 @end
 
@@ -195,6 +196,7 @@
     self = [super init];
     if (self) {
         [self initDefaultConfig];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cpScreenOrientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
     return self;
 }
@@ -205,7 +207,7 @@
     if (self) {
         [self initDefaultConfig];
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
-//        self.backgroundColor = [UIColor clearColor];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cpScreenOrientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
     return self;
 }
@@ -240,6 +242,8 @@
             [_table setLayoutMargins:UIEdgeInsetsZero];
             
         }
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cpScreenOrientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
     return self;
 }
@@ -302,56 +306,13 @@
 
 - (void)showFrom:(UIView *)from alignStyle:(CPAlignStyle)style
 {
-    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+    _showFrom = from;
+    _alignStyle = style;
     
+    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
     [window addSubview:self];
     
-    self.frame = window.bounds;
-    
-    CGRect newFrame = [from convertRect:from.bounds toView:window];
-    
-    
-    // change containerView position
-    CGRect containerViewFrame = self.containerView.frame;
-    containerViewFrame.origin.y =  CGRectGetMaxY(newFrame) + 5;
-    self.containerView.frame = containerViewFrame;
-    
-    
-    switch (style) {
-        case CPAlignStyleCenter:
-        {
-            CGPoint center = self.containerView.center;
-            center.x = CGRectGetMidX(newFrame);
-            self.containerView.center = center;
-            
-            self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame)/2;
-        }
-            break;
-        case CPAlignStyleLeft:
-        {
-            CGRect frame = self.containerView.frame;
-            frame.origin.x = CGRectGetMinX(newFrame);
-            self.containerView.frame = frame;
-            
-            self.containerView.apexOftriangelX = CGRectGetWidth(from.frame)/2;
-        }
-            
-            break;
-        case CPAlignStyleRight:
-        {
-            CGRect frame = self.containerView.frame;
-            frame.origin.x = CGRectGetMinX(newFrame) - (fabs(frame.size.width - newFrame.size.width));
-            self.containerView.frame = frame;
-            
-            self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame) - CGRectGetWidth(from.frame)/2;
-        }
-            
-            break;
-            
-        default:
-            break;
-    }
-    
+    [self updateSubViewFrames];
     
     if ([self.delegate respondsToSelector:@selector(popOverViewDidShow:)]) {
         [self.delegate popOverViewDidShow:self];
@@ -382,6 +343,70 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self dismiss];
+}
+
+- (void)updateSubViewFrames
+{
+    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+    self.frame = window.bounds;
+    
+    if (!_showFrom) {
+        
+        self.containerView.center = self.center;
+        return;
+    }
+    
+    CGRect newFrame = [_showFrom convertRect:_showFrom.bounds toView:window];
+    
+    
+    // change containerView position
+    CGRect containerViewFrame = self.containerView.frame;
+    containerViewFrame.origin.y =  CGRectGetMaxY(newFrame) + 5;
+    self.containerView.frame = containerViewFrame;
+    
+    
+    switch (_alignStyle) {
+        case CPAlignStyleCenter:
+        {
+            CGPoint center = self.containerView.center;
+            center.x = CGRectGetMidX(newFrame);
+            self.containerView.center = center;
+            
+            self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame)/2;
+        }
+            break;
+        case CPAlignStyleLeft:
+        {
+            CGRect frame = self.containerView.frame;
+            frame.origin.x = CGRectGetMinX(newFrame);
+            self.containerView.frame = frame;
+            
+            self.containerView.apexOftriangelX = CGRectGetWidth(_showFrom.frame)/2;
+        }
+            
+            break;
+        case CPAlignStyleRight:
+        {
+            CGRect frame = self.containerView.frame;
+            frame.origin.x = CGRectGetMinX(newFrame) - (fabs(frame.size.width - newFrame.size.width));
+            self.containerView.frame = frame;
+            
+            self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame) - CGRectGetWidth(_showFrom.frame)/2;
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
+
+}
+
+#pragma mark- Notis
+
+- (void)cpScreenOrientationChange
+{
+    [self updateSubViewFrames];
 }
 
 #pragma mark- lazy
@@ -456,6 +481,13 @@
         
     }
     
+}
+
+#pragma mark- 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    NSLog(@"%s", __func__);
 }
 
 @end

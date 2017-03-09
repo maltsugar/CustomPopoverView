@@ -76,7 +76,7 @@
     CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 100, 44*2) titleMenus:menus config:nil];
     pView.delegate = self;
     pView.containerBackgroudColor = RGBCOLOR(64, 64, 64);
-    [pView showFrom:sender alignStyle:CPAlignStyleRight];
+    [pView showFrom:nil alignStyle:CPAlignStyleRight];
 
 
 }
