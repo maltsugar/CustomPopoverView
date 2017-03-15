@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#include <sys/time.h> 
 
 @interface AppDelegate ()
 
@@ -17,8 +18,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSLog(@" %@", [self timeFrom1900]);
     return YES;
 }
+- (NSString *)timeFrom1900
+{
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    long currentTime =  tv.tv_sec * 1000 + tv.tv_usec / 1000;
+    
+    return @(currentTime + 2209017600000).stringValue;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

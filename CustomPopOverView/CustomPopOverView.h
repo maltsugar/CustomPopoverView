@@ -43,6 +43,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 @property (nonatomic, strong) UIColor *tableBackgroundColor;
 @property (nonatomic, strong) UIColor *separatorColor;
 @property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, assign) NSTextAlignment textAlignment;
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic, assign) UITableViewCellSeparatorStyle separatorStyle;
 
@@ -71,6 +72,12 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 // for normal use, you can set titles, it will show as a tableview
 // 简单使用的话，直接传一组菜单，会以tableview的形式展示，可以自己修改tableview属性
 - (instancetype)initWithBounds:(CGRect)bounds titleMenus:(NSArray *)titles config:(PopOverVieConfiguration *)config;
+
+
+// infoes 里是字典@{@"name": @"foo", @"icon": @"bar"}
+- (instancetype)initWithBounds:(CGRect)bounds titleInfo:(NSArray <NSDictionary<NSString *,NSString *> *>*)infoes config:(PopOverVieConfiguration *)config;
+
+
 
 
 - (void)showFrom:(UIView *)from alignStyle:(CPAlignStyle)style;

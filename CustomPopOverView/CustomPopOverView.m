@@ -177,6 +177,7 @@
 @property (nonatomic, strong) PopOverContainerView *containerView; // black backgroud container
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSArray *titleMenus;
+@property (nonatomic, strong) NSArray *titleInfoes;
 
 @property (nonatomic, assign) CPAlignStyle alignStyle;
 @property (nonatomic,   weak) UIView *showFrom;
@@ -224,6 +225,42 @@
         }
         
         self.titleMenus = titles;
+        
+        self.table.frame = CGRectMake(0, 0, CGRectGetWidth(bounds), CGRectGetHeight(bounds));
+        self.table.delegate = self;
+        self.table.dataSource = self;
+        
+        [self setContent:self.table];
+        
+        _table.scrollEnabled = NO;
+        if ([_table respondsToSelector:@selector(setSeparatorInset:)]) {
+            //让线头不留白
+            [_table setSeparatorInset:UIEdgeInsetsZero];
+            
+        }
+        if ([_table respondsToSelector:@selector(setLayoutMargins:)]) {
+            
+            [_table setLayoutMargins:UIEdgeInsetsZero];
+            
+        }
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cpScreenOrientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+    }
+    return self;
+}
+
+- (instancetype)initWithBounds:(CGRect)bounds titleInfo:(NSArray <NSDictionary<NSString *,NSString *> *>*)infoes config:(PopOverVieConfiguration *)config
+{
+    self = [super initWithFrame:bounds];
+    if (self) {
+        if (!config) {
+            [self initDefaultConfig];
+        }else
+        {
+            _config = config;
+        }
+        
+        self.titleInfoes = infoes;
         
         self.table.frame = CGRectMake(0, 0, CGRectGetWidth(bounds), CGRectGetHeight(bounds));
         self.table.delegate = self;
@@ -439,7 +476,7 @@
 #pragma mark- <UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.titleMenus.count;
+    return self.titleMenus.count?:self.titleInfoes.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -451,10 +488,24 @@
         cell.contentView.backgroundColor = [UIColor clearColor];
     }
     
-    cell.textLabel.text = self.titleMenus[indexPath.row];
+    NSString *text;
+    NSString *icon;
+    if (self.titleMenus.count) {
+        text = self.titleMenus[indexPath.row];
+    }
+    
+    if (self.titleInfoes.count) {
+        NSDictionary *dic = self.titleInfoes[indexPath.row];
+        text = dic[@"name"];
+        icon = dic[@"icon"];
+    }
+    
+    cell.textLabel.text = text;
     cell.textLabel.textColor = _config.textColor;
     cell.textLabel.font = _config.font;
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.textAlignment = _config.textAlignment;
+    cell.imageView.image = [UIImage imageNamed:icon];
+    
     return cell;
 }
 

@@ -13,6 +13,15 @@
 #define RGBCOLOR(r,g,b)		[UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 #define UIColorFromHex(hexValue) [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0xFF00) >> 8))/255.0 blue:((float)(hexValue & 0xFF))/255.0 alpha:1.0]
 
+
+#define kGYCancelSameActionInTime(_seconds_) \
+static BOOL shouldPrevent; \
+if (shouldPrevent) return; \
+shouldPrevent = YES; \
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ \
+    shouldPrevent = NO; \
+}); \
+
 @interface ViewController () <CustomPopOverViewDelegate>
 {
     UIButton *_rightBtn;
@@ -103,6 +112,9 @@
 
 - (IBAction)testClick:(UIButton *)sender {
     
+    kGYCancelSameActionInTime(1);
+    NSLog(@"---");
+    
     _titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
     PopOverVieConfiguration *config = [PopOverVieConfiguration new];
     config.triAngelHeight = 5.0;
@@ -112,12 +124,22 @@
     config.defaultRowHeight = 30;
     config.tableBackgroundColor = [UIColor grayColor];
     config.textColor = [UIColor orangeColor];
+    config.textAlignment = NSTextAlignmentLeft;
     
+    NSArray *arr = @[
+                     @{@"name": @"羽毛球", @"icon": @"icon_badminton"},
+                     @{@"name": @"篮球", @"icon": @"icon_basketball"},
+                     @{@"name": @"足球", @"icon": @"icon_football"},
+                     @{@"name": @"更多", @"icon": @"icon_more"}
+                     ];
     
-    CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) titleMenus:_titles config:config];
+    CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 200, 30*4) titleInfo:arr config:config];
     view.containerBackgroudColor = [UIColor blueColor];
     view.delegate = self;
     [view showFrom:sender alignStyle:CPAlignStyleCenter];
+    
+    
+    
 }
 - (IBAction)testClick2:(UIButton *)sender {
     
