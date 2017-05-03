@@ -1,12 +1,12 @@
-#A custom popoverView
+# A custom popoverView
 
 This custom popover view, you can give an array of menu titles for normal use. It also support custom view or viewController. It’s frame depends on the button which clicked, and it provides three alignments for the button.
 
-##The preview chart is as follows
+## The preview chart is as follows
 ![demo](http://ww3.sinaimg.cn/mw690/72aba7efgw1f3ch00wwwxg20al0j3gqp.gif)
 ![demo2](http://ww2.sinaimg.cn/mw690/72aba7efgw1f3dcknlfphg20am0j3dm6.gif)
 
-##How to use
+## How to use
 ### custom view
 <pre><code>
 CustomPopOverView *view = [CustomPopOverView popOverView];
@@ -67,14 +67,14 @@ view.content = btn;
 
 <hr>
 
-#一款自定义 弹出视图
+# 一款自定义 弹出视图
 自定义弹出视图，内容支持传一组菜单标题，也支持自定义view，或者自定义viewController， 支持任意按钮触发，会显示在按钮底部，也支持切换按钮的对齐方式：左对齐、居中、右对齐
 
-##预览图如下
+## 预览图如下
 ![预览图](http://ww3.sinaimg.cn/mw690/72aba7efgw1f3ch00wwwxg20al0j3gqp.gif)
 ![demo2](http://ww2.sinaimg.cn/mw690/72aba7efgw1f3dcknlfphg20am0j3dm6.gif)
 
-##用法
+## 用法
 
 
 ### 自定义view
