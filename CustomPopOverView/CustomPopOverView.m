@@ -138,21 +138,13 @@
     [self setLayerFrame:self.frame];
 }
 
-- (void)didMoveToSuperview
-{
-    [super didMoveToSuperview];
-    
-    
-    // animations support
-    self.transform = CGAffineTransformMakeScale(1.1,1.1);
-    self.alpha = 0;
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.2];
-    self.transform = CGAffineTransformMakeScale(1.0,1.0);
-    self.alpha = 1;
-    [UIView commitAnimations];
-}
+//- (void)didMoveToSuperview
+//{
+//    [super didMoveToSuperview];
+//    
+//    
+//    
+//}
 
 
 - (void)dealloc
@@ -292,6 +284,7 @@
     _config.triAngelWidth = 10.0;
     _config.containerViewCornerRadius = 5.0;
     _config.roundMargin = 10.0;
+    _config.showSpace = 5.f;
     
     // 普通用法
     _config.defaultRowHeight = 44.f;
@@ -354,6 +347,16 @@
     if ([self.delegate respondsToSelector:@selector(popOverViewDidShow:)]) {
         [self.delegate popOverViewDidShow:self];
     }
+    
+    // animations support
+    self.containerView.transform = CGAffineTransformMakeScale(1.1,1.1);
+    self.containerView.alpha = 0;
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.2];
+    self.containerView.transform = CGAffineTransformMakeScale(1.0,1.0);
+    self.containerView.alpha = 1;
+    [UIView commitAnimations];
 }
 
 
@@ -366,10 +369,8 @@
         self.containerView.transform = CGAffineTransformMakeScale(0.9,0.9);
         self.containerView.alpha = 0;
     } completion:^(BOOL finished) {
-        self.containerView.hidden = YES;
         [self removeFromSuperview];
     }];
-    
     
     
     if ([self.delegate respondsToSelector:@selector(popOverViewDidDismiss:)]) {
@@ -398,7 +399,7 @@
     
     // change containerView position
     CGRect containerViewFrame = self.containerView.frame;
-    containerViewFrame.origin.y =  CGRectGetMaxY(newFrame) + 5;
+    containerViewFrame.origin.y =  CGRectGetMaxY(newFrame) + _config.showSpace;
     self.containerView.frame = containerViewFrame;
     
     
@@ -436,7 +437,7 @@
         default:
             break;
     }
-
+    
 }
 
 #pragma mark- Notis

@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B90F17EE1ECEDD6C00DD3434 /* CustomPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F17ED1ECEDD6C00DD3434 /* CustomPopOverView.m */; };
 		B94C1B901CD1B22F008EDDF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B8F1CD1B22F008EDDF7 /* main.m */; };
 		B94C1B931CD1B22F008EDDF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B921CD1B22F008EDDF7 /* AppDelegate.m */; };
 		B94C1B961CD1B22F008EDDF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B951CD1B22F008EDDF7 /* ViewController.m */; };
 		B94C1B991CD1B22F008EDDF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94C1B971CD1B22F008EDDF7 /* Main.storyboard */; };
 		B94C1B9B1CD1B22F008EDDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B94C1B9A1CD1B22F008EDDF7 /* Assets.xcassets */; };
 		B94C1B9E1CD1B22F008EDDF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94C1B9C1CD1B22F008EDDF7 /* LaunchScreen.storyboard */; };
-		B94C1BA71CD1B32F008EDDF7 /* CustomPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1BA61CD1B32F008EDDF7 /* CustomPopOverView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B90F17EC1ECEDD6C00DD3434 /* CustomPopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPopOverView.h; sourceTree = "<group>"; };
+		B90F17ED1ECEDD6C00DD3434 /* CustomPopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPopOverView.m; sourceTree = "<group>"; };
 		B94C1B8B1CD1B22F008EDDF7 /* CustomPopOverView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomPopOverView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94C1B8F1CD1B22F008EDDF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B94C1B911CD1B22F008EDDF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -27,8 +29,6 @@
 		B94C1B9A1CD1B22F008EDDF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B94C1B9D1CD1B22F008EDDF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B94C1B9F1CD1B22F008EDDF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B94C1BA51CD1B32F008EDDF7 /* CustomPopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPopOverView.h; sourceTree = "<group>"; };
-		B94C1BA61CD1B32F008EDDF7 /* CustomPopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPopOverView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +63,8 @@
 			children = (
 				B94C1B911CD1B22F008EDDF7 /* AppDelegate.h */,
 				B94C1B921CD1B22F008EDDF7 /* AppDelegate.m */,
-				B94C1BA51CD1B32F008EDDF7 /* CustomPopOverView.h */,
-				B94C1BA61CD1B32F008EDDF7 /* CustomPopOverView.m */,
+				B90F17EC1ECEDD6C00DD3434 /* CustomPopOverView.h */,
+				B90F17ED1ECEDD6C00DD3434 /* CustomPopOverView.m */,
 				B94C1B941CD1B22F008EDDF7 /* ViewController.h */,
 				B94C1B951CD1B22F008EDDF7 /* ViewController.m */,
 				B94C1B971CD1B22F008EDDF7 /* Main.storyboard */,
@@ -157,7 +157,7 @@
 				B94C1B961CD1B22F008EDDF7 /* ViewController.m in Sources */,
 				B94C1B931CD1B22F008EDDF7 /* AppDelegate.m in Sources */,
 				B94C1B901CD1B22F008EDDF7 /* main.m in Sources */,
-				B94C1BA71CD1B32F008EDDF7 /* CustomPopOverView.m in Sources */,
+				B90F17EE1ECEDD6C00DD3434 /* CustomPopOverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

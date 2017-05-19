@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 // 配置类
 @interface PopOverVieConfiguration : NSObject
 
+@property (nonatomic, assign) float showSpace; // 视图出现时与目标view的间隙
 @property (nonatomic, assign) float triAngelHeight; // 小三角的高度
 @property (nonatomic, assign) float triAngelWidth; // 小三角的宽度
 @property (nonatomic, assign) float containerViewCornerRadius; // 弹出视图背景的圆角半径
