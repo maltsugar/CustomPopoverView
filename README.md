@@ -1,3 +1,14 @@
+# 修复iOS11下，某些情况不能弹出的bug
+
+经过测试，iOS11 在dismissViewControllerAnimated后弹出时，有时候会无法出现，demo直接跑是没有问题的   
+`-showFrom:alignStyle:`下打印
+`UIWindow *window = [[UIApplication sharedApplication].windows lastObject];`
+这个window是`_UIInteractiveHighlightEffectWindow: 0x7fed5857f7e0`，不是keywindow。
+为带来bug的兄弟说声抱歉，可以尝试下修改后的。
+
+
+
+
 # A custom popoverView
 
 This custom popover view, you can give an array of menu titles for normal use. It also support custom view or viewController. It’s frame depends on the button which clicked, and it provides three alignments for the button.
