@@ -339,7 +339,10 @@
     _showFrom = from;
     _alignStyle = style;
     
-    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+    // 此方法找到的window会在模态弹出时不准确
+//    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+    
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     [window addSubview:self];
     
     [self updateSubViewFrames];
@@ -385,7 +388,7 @@
 
 - (void)updateSubViewFrames
 {
-    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     self.frame = window.bounds;
     
     if (!_showFrom) {
