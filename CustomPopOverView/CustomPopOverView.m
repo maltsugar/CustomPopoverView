@@ -468,8 +468,8 @@
         //        _table.backgroundView = nil;
         _table.backgroundColor = _config.tableBackgroundColor;
         _table.separatorColor = _config.separatorColor;
-        _table.rowHeight = _config.defaultRowHeight;
-        _table.separatorStyle = _config.separatorStyle;
+        _table.rowHeight = _config.defaultRowHeight?:44.f;
+        _table.separatorStyle = _config.separatorStyle?:UITableViewCellSeparatorStyleSingleLine;
         _table.tableFooterView = [UIView new];
     }
     return _table;

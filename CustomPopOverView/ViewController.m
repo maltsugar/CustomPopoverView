@@ -82,11 +82,20 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
 {
     
     NSArray *menus = @[@"清空已完成", @"清空全部"];
-    CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 100, 44*2) titleMenus:menus config:nil];
+//    CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 300)
+//    PopOverVieConfiguration *config = [PopOverVieConfiguration new];
+//    config.roundMargin = 5;
+//    config.triAngelHeight = 8.0;
+//    config.triAngelWidth = 10.0;
+//    config.containerViewCornerRadius = 5.0;
+//    config.roundMargin = 10.0;
+//    config.showSpace = 5.f;
+    
+    
+    CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 10, 300) titleMenus:menus config:nil];
     pView.delegate = self;
     pView.containerBackgroudColor = RGBCOLOR(64, 64, 64);
     [pView showFrom:nil alignStyle:CPAlignStyleRight];
-
 
 }
 
