@@ -17,13 +17,13 @@
 
 
 ### 自定义view
-<pre><code>
+```
 CustomPopOverView *view = [CustomPopOverView popOverView];
 view.content = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
 view.containerBackgroudColor = [UIColor blueColor];
 [view showFrom:_leftBtn alignStyle:CPAlignStyleLeft];
 
-</code></pre>
+```
 
 <pre><code>
 CustomPopOverView *view = [CustomPopOverView popOverView];
@@ -37,7 +37,7 @@ view.content = btn;
 
 
 ### 自定义VC
-<pre><code>
+```
 	UIViewController *vc = [[UIViewController alloc]init];
     vc.view.backgroundColor = [UIColor yellowColor];
     vc.view.frame = CGRectMake(0, 0, 200, 200);
@@ -52,11 +52,11 @@ view.content = btn;
     view.contentViewController = vc;
     
     [view showFrom:_rightBtn alignStyle:CPAlignStyleRight];
-</code></pre>
+```
 
 
 ### 普通用法（只传一组菜单名称）
-<pre><code>
+```
 	_titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
 	PopOverVieConfiguration *config = [PopOverVieConfiguration new];
     config.triAngelHeight = 5.0;
@@ -72,7 +72,7 @@ view.content = btn;
 	view.containerBackgroudColor = [UIColor blueColor];
 	view.delegate = self;
 	[view showFrom:sender alignStyle:CPAlignStyleCenter];
-</code></pre>
+```
 
 ### 如果你有问题欢迎issue，希望你能够喜欢
 
@@ -92,15 +92,15 @@ This custom popover view, you can give an array of menu titles for normal use. I
 
 ## How to use
 ### custom view
-<pre><code>
+```
 CustomPopOverView *view = [CustomPopOverView popOverView];
 view.content = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 100, 200)];
 view.containerBackgroudColor = [UIColor blueColor];
 [view showFrom:_leftBtn alignStyle:CPAlignStyleLeft];
 
-</code></pre>
+```
 
-<pre><code>
+```
 CustomPopOverView *view = [CustomPopOverView popOverView];
     
 UIButton *btn = [UIButton buttonWithType:UIButtonTypeInfoDark];
@@ -108,10 +108,10 @@ btn.bounds = CGRectMake(0, 0, 60, 40);
 view.content = btn;    
 [view showFrom:sender alignStyle:CPAlignStyleRight];
 
-</code></pre>
+```
 
 ### custom viewController
-<pre><code>
+```
 	UIViewController *vc = [[UIViewController alloc]init];
     vc.view.backgroundColor = [UIColor yellowColor];
     vc.view.frame = CGRectMake(0, 0, 200, 200);
@@ -126,10 +126,10 @@ view.content = btn;
     view.contentViewController = vc;
     
     [view showFrom:_rightBtn alignStyle:CPAlignStyleRight];
-</code></pre>
+```
 
 ### normal use(only needs an array of titles)
-<pre><code>
+```
 	_titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
 	PopOverVieConfiguration *config = [PopOverVieConfiguration new];
     config.triAngelHeight = 5.0;
@@ -145,7 +145,7 @@ view.content = btn;
 	view.containerBackgroudColor = [UIColor blueColor];
 	view.delegate = self;
 	[view showFrom:sender alignStyle:CPAlignStyleCenter];
-</code></pre>
+```
 
 ### if you have any question welcome to issue to me，hope you like it!
 
