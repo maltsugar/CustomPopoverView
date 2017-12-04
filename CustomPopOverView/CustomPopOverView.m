@@ -285,6 +285,7 @@
     _config.containerViewCornerRadius = 5.0;
     _config.roundMargin = 10.0;
     _config.showSpace = 5.f;
+    _config.shouldDismissOnTouchOutside = YES;
     
     // 普通用法
     _config.defaultRowHeight = 44.f;
@@ -383,7 +384,9 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self dismiss];
+    if (self.config.shouldDismissOnTouchOutside) {
+        [self dismiss];
+    }
 }
 
 - (void)updateSubViewFrames

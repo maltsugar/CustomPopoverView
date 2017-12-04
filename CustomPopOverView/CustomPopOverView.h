@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 @property (nonatomic, assign) float triAngelWidth; // 小三角的宽度
 @property (nonatomic, assign) float containerViewCornerRadius; // 弹出视图背景的圆角半径
 @property (nonatomic, assign) float roundMargin; // 调整弹出视图背景四周的空隙
-
+@property (nonatomic, assign) BOOL shouldDismissOnTouchOutside; // 点击空白区域是否消失（默认YES）
 
 // 普通用法配置
 @property (nonatomic, assign) float defaultRowHeight; // row高度
