@@ -10,6 +10,16 @@
 
 
 @implementation PopOverVieConfiguration
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _shouldDismissOnTouchOutside = YES;
+        _isNeedAnimate = YES;
+    }
+    return self;
+}
+
 @end
 
 
@@ -119,7 +129,7 @@
     
     
     self.popLayer.path = path.CGPath;
-    self.popLayer.fillColor = _layerColor? _layerColor.CGColor : [UIColor greenColor].CGColor;
+    self.popLayer.fillColor = _layerColor? _layerColor.CGColor : [UIColor orangeColor].CGColor;
     
     
     
@@ -285,7 +295,6 @@
     _config.containerViewCornerRadius = 5.0;
     _config.roundMargin = 10.0;
     _config.showSpace = 5.f;
-    _config.shouldDismissOnTouchOutside = YES;
     
     // 普通用法
     _config.defaultRowHeight = 44.f;
@@ -352,29 +361,39 @@
         [self.delegate popOverViewDidShow:self];
     }
     
-    // animations support
-    self.containerView.transform = CGAffineTransformMakeScale(1.1,1.1);
-    self.containerView.alpha = 0;
+    if (_config.isNeedAnimate) {
+        // animations support
+        self.containerView.transform = CGAffineTransformMakeScale(1.1,1.1);
+        self.containerView.alpha = 0;
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.2];
+        self.containerView.transform = CGAffineTransformMakeScale(1.0,1.0);
+        self.containerView.alpha = 1;
+        [UIView commitAnimations];
+    }
     
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.2];
-    self.containerView.transform = CGAffineTransformMakeScale(1.0,1.0);
-    self.containerView.alpha = 1;
-    [UIView commitAnimations];
+    
 }
 
 
 
 - (void)dismiss
 {
-    
-    // animations support
-    [UIView animateWithDuration:0.2 animations:^{
-        self.containerView.transform = CGAffineTransformMakeScale(0.9,0.9);
-        self.containerView.alpha = 0;
-    } completion:^(BOOL finished) {
+    if (_config.isNeedAnimate) {
+        // animations support
+        [UIView animateWithDuration:0.2 animations:^{
+            self.containerView.transform = CGAffineTransformMakeScale(0.9,0.9);
+            self.containerView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+    }else
+    {
         [self removeFromSuperview];
-    }];
+    }
+    
+    
     
     
     if ([self.delegate respondsToSelector:@selector(popOverViewDidDismiss:)]) {

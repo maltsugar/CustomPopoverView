@@ -38,6 +38,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 @property (nonatomic, assign) float containerViewCornerRadius; // 弹出视图背景的圆角半径
 @property (nonatomic, assign) float roundMargin; // 调整弹出视图背景四周的空隙
 @property (nonatomic, assign) BOOL shouldDismissOnTouchOutside; // 点击空白区域是否消失（默认YES）
+@property (nonatomic, assign) BOOL isNeedAnimate; // 开始和消失动画(默认YES)
 
 // 普通用法配置
 @property (nonatomic, assign) float defaultRowHeight; // row高度
