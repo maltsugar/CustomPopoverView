@@ -13,6 +13,15 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
     CPAlignStyleRight,
 };
 
+
+
+typedef NS_ENUM(NSUInteger, CPContentPosition) {
+    CPContentPositionAlwaysDown,                // 总是在控件下面
+    CPContentPositionAlwaysUp,                  // 总是在控件上面
+    CPContentPositionAutomaticDownFirst,        // 自动根据屏幕调整， 优先向下（缺省）
+    CPContentPositionAutomaticUpFirst,          // 自动根据屏幕调整， 优先向上
+};
+
 @class CustomPopOverView;
 @protocol CustomPopOverViewDelegate <NSObject>
 
@@ -82,7 +91,25 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
 
 
 
+
+/**
+ 展示弹出视图
+
+ @param from 呼出控件，nil则表示在屏幕中心
+ @param style 对齐方式， 内容相对呼出控件位置自动控制
+ */
 - (void)showFrom:(UIView *)from alignStyle:(CPAlignStyle)style;
+
+
+/**
+ 展示弹出视图
+
+ @param from 呼出控件，nil则表示在屏幕中心
+ @param style 对齐方式
+ @param position 内容相对于呼出控件位置（必须有呼出控件，否则就是屏幕中心，自定义alertView是这种模式）
+ */
+- (void)showFrom:(UIView *)from alignStyle:(CPAlignStyle)style relativePosition:(CPContentPosition)position;
+
 
 - (void)dismiss;
 @end

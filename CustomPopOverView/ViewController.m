@@ -82,17 +82,16 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
 {
     
     NSArray *menus = @[@"清空已完成", @"清空全部"];
-//    CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 300)
-//    PopOverVieConfiguration *config = [PopOverVieConfiguration new];
-//    config.roundMargin = 5;
-//    config.triAngelHeight = 8.0;
-//    config.triAngelWidth = 10.0;
-//    config.containerViewCornerRadius = 5.0;
-//    config.roundMargin = 10.0;
-//    config.showSpace = 5.f;
+    PopOverVieConfiguration *config = [PopOverVieConfiguration new];
+    config.roundMargin = 5;
+    config.triAngelHeight = 0.0;
+    config.triAngelWidth = 0.0;
+    config.containerViewCornerRadius = 5.0;
+    config.roundMargin = 10.0;
+    config.showSpace = 5.f;
     
     
-    CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 10, 300) titleMenus:menus config:nil];
+    CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 40, 300) titleMenus:menus config:config];
     pView.delegate = self;
     pView.containerBackgroudColor = RGBCOLOR(64, 64, 64);
     [pView showFrom:nil alignStyle:CPAlignStyleRight];
@@ -126,11 +125,12 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
     
     _titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
     PopOverVieConfiguration *config = [PopOverVieConfiguration new];
-    config.triAngelHeight = 5.0;
+    config.triAngelHeight = 10.0;
     config.triAngelWidth = 7.0;
-    config.containerViewCornerRadius = 3.0;
-    config.roundMargin = 2.0;
+    config.containerViewCornerRadius = 10.0;
+    config.roundMargin = 10.0;
     config.defaultRowHeight = 30;
+    config.showSpace = 20;
     config.tableBackgroundColor = [UIColor grayColor];
     config.textColor = [UIColor orangeColor];
     config.textAlignment = NSTextAlignmentLeft;
@@ -158,8 +158,38 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
     btn.bounds = CGRectMake(0, 0, 60, 40);
     view.content = btn;
     
-    [view showFrom:sender alignStyle:CPAlignStyleRight];
+    [view showFrom:sender alignStyle:CPAlignStyleRight relativePosition:CPContentPositionAlwaysUp];
 }
+
+- (IBAction)testClick3:(UIButton *)sender {
+    
+    PopOverVieConfiguration *config = [PopOverVieConfiguration new];
+    config.triAngelHeight = 10.0;
+    config.triAngelWidth = 7.0;
+    config.containerViewCornerRadius = 10.0;
+    config.roundMargin = 10.0;
+    config.defaultRowHeight = 30;
+    config.showSpace = 20;
+    config.tableBackgroundColor = [UIColor grayColor];
+    config.textColor = [UIColor orangeColor];
+    config.textAlignment = NSTextAlignmentLeft;
+    
+    NSArray *arr = @[
+                     @{@"name": @"羽毛球", @"icon": @"icon_badminton"},
+                     @{@"name": @"篮球", @"icon": @"icon_basketball"},
+                     @{@"name": @"足球", @"icon": @"icon_football"},
+                     @{@"name": @"更多", @"icon": @"icon_more"}
+                     ];
+    
+    CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 130, 30*4) titleInfo:arr config:config];
+    view.containerBackgroudColor = [UIColor blueColor];
+    view.delegate = self;
+    [view showFrom:sender alignStyle:CPAlignStyleRight];
+    
+    
+}
+
+
 
 #pragma mark- CustomPopOverViewDelegate
 

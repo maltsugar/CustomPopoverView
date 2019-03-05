@@ -1,10 +1,14 @@
-# 修复iOS11下，某些情况不能弹出的bug
+![](https://img.shields.io/badge/platform-iOS-red.svg)&nbsp;![](https://img.shields.io/badge/language-Objective--C-orange.svg)&nbsp;[![CocoaPods](http://img.shields.io/cocoapods/v/CustomPopOverView.svg?style=flat)](http://cocoapods.org/pods/CustomPopOverView)&nbsp;![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)
 
-经过测试，iOS11 在dismissViewControllerAnimated后弹出时，有时候会无法出现，demo直接跑是没有问题的   
+
+# 版本记录
+- 1.0.2 支持设置内容相对呼出的位置的上方或者下方，支持自动调整位置
+- 1.0.1 修复iOS11下，某些情况不能弹出的bug (经过测试，iOS11 在dismissViewControllerAnimated后弹出时，有时候会无法出现，demo直接跑是没有问题的   
 `-showFrom:alignStyle:`下打印
 `UIWindow *window = [[UIApplication sharedApplication].windows lastObject];`
 这个window是`_UIInteractiveHighlightEffectWindow: 0x7fed5857f7e0`，不是keywindow。
-为带来bug的兄弟说声抱歉，可以尝试下修改后的。
+为带来bug的兄弟说声抱歉，可以尝试下修改后的。)
+
 
 # 一款自定义 弹出视图
 自定义弹出视图，内容支持传一组菜单标题，也支持自定义view，或者自定义viewController， 支持任意按钮触发，会显示在按钮底部，也支持切换按钮的对齐方式：左对齐、居中、右对齐
@@ -13,7 +17,10 @@
 ![预览图](http://ww3.sinaimg.cn/mw690/72aba7efgw1f3ch00wwwxg20al0j3gqp.gif)
 ![demo2](http://ww2.sinaimg.cn/mw690/72aba7efgw1f3dcknlfphg20am0j3dm6.gif)
 
-## 用法
+# 用法
+- 手动下载: `CustomPopOverView`拖进去
+- Cocoapods: `pod 'CustomPopOverView'`
+
 
 
 ### 自定义view

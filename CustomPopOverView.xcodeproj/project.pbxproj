@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B90F17EE1ECEDD6C00DD3434 /* CustomPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B90F17ED1ECEDD6C00DD3434 /* CustomPopOverView.m */; };
+		040CBF3B222E56460014F9F0 /* CustomPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CBF3A222E56460014F9F0 /* CustomPopOverView.m */; };
 		B94C1B901CD1B22F008EDDF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B8F1CD1B22F008EDDF7 /* main.m */; };
 		B94C1B931CD1B22F008EDDF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B921CD1B22F008EDDF7 /* AppDelegate.m */; };
 		B94C1B961CD1B22F008EDDF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B951CD1B22F008EDDF7 /* ViewController.m */; };
@@ -17,8 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B90F17EC1ECEDD6C00DD3434 /* CustomPopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPopOverView.h; sourceTree = "<group>"; };
-		B90F17ED1ECEDD6C00DD3434 /* CustomPopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPopOverView.m; sourceTree = "<group>"; };
+		040CBF39222E56460014F9F0 /* CustomPopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPopOverView.h; sourceTree = "<group>"; };
+		040CBF3A222E56460014F9F0 /* CustomPopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPopOverView.m; sourceTree = "<group>"; };
 		B94C1B8B1CD1B22F008EDDF7 /* CustomPopOverView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomPopOverView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94C1B8F1CD1B22F008EDDF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B94C1B911CD1B22F008EDDF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,6 +42,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040CBF38222E56460014F9F0 /* CustomPopOverView */ = {
+			isa = PBXGroup;
+			children = (
+				040CBF39222E56460014F9F0 /* CustomPopOverView.h */,
+				040CBF3A222E56460014F9F0 /* CustomPopOverView.m */,
+			);
+			name = CustomPopOverView;
+			path = Lib/CustomPopOverView;
+			sourceTree = "<group>";
+		};
 		B94C1B821CD1B22F008EDDF7 = {
 			isa = PBXGroup;
 			children = (
@@ -61,10 +71,9 @@
 		B94C1B8D1CD1B22F008EDDF7 /* CustomPopOverView */ = {
 			isa = PBXGroup;
 			children = (
+				040CBF38222E56460014F9F0 /* CustomPopOverView */,
 				B94C1B911CD1B22F008EDDF7 /* AppDelegate.h */,
 				B94C1B921CD1B22F008EDDF7 /* AppDelegate.m */,
-				B90F17EC1ECEDD6C00DD3434 /* CustomPopOverView.h */,
-				B90F17ED1ECEDD6C00DD3434 /* CustomPopOverView.m */,
 				B94C1B941CD1B22F008EDDF7 /* ViewController.h */,
 				B94C1B951CD1B22F008EDDF7 /* ViewController.m */,
 				B94C1B971CD1B22F008EDDF7 /* Main.storyboard */,
@@ -157,7 +166,7 @@
 				B94C1B961CD1B22F008EDDF7 /* ViewController.m in Sources */,
 				B94C1B931CD1B22F008EDDF7 /* AppDelegate.m in Sources */,
 				B94C1B901CD1B22F008EDDF7 /* main.m in Sources */,
-				B90F17EE1ECEDD6C00DD3434 /* CustomPopOverView.m in Sources */,
+				040CBF3B222E56460014F9F0 /* CustomPopOverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
