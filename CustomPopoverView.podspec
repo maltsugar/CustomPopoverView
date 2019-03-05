@@ -15,8 +15,8 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "CustomPopoverView"
-  spec.version      = "1.0.2"
+  spec.name         = "CustomPopOverView"
+  spec.version      = "1.0.3"
   spec.summary      = "一款小巧灵活的自定义弹出视图, 可以做自定义AlertView、弹出窗口等等, A tiny and sweet custom popView (pop popup)"
 
   # This description is used to generate tags and improve search results.
@@ -26,6 +26,7 @@ Pod::Spec.new do |spec|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
                    一款小巧灵活的自定义弹出视图, 可以做自定义AlertView、弹出窗口等等, A tiny and sweet custom popView (pop popup)
+                   支持自定义弹出位置为上方或下方，支持自动判断弹出位置
                    DESC
 
   spec.homepage     = "https://github.com/maltsugar/CustomPopoverView"
@@ -39,7 +40,7 @@ Pod::Spec.new do |spec|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  spec.license      = { :type => "MIT", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -90,8 +91,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "CustomPopOverView", "CustomPopOverView/Lib/CustomPopOverView/*.{h,m}"
-  s.framework  = "UIKit"
+  spec.source_files = "CustomPopOverView", "CustomPopOverView/Lib/CustomPopOverView/*.{h,m}"
+  spec.framework  = "UIKit"
 
   # spec.public_header_files = "Classes/**/*.h"
 

@@ -2,7 +2,7 @@
 
 
 # 版本记录
-- 1.0.2 支持设置内容相对呼出的位置的上方或者下方，支持自动调整位置
+- 1.0.3 支持设置内容相对呼出的位置的上方或者下方，支持自动调整位置
 - 1.0.1 修复iOS11下，某些情况不能弹出的bug (经过测试，iOS11 在dismissViewControllerAnimated后弹出时，有时候会无法出现，demo直接跑是没有问题的   
 `-showFrom:alignStyle:`下打印
 `UIWindow *window = [[UIApplication sharedApplication].windows lastObject];`
