@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040CBF3B222E56460014F9F0 /* CustomPopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CBF3A222E56460014F9F0 /* CustomPopOverView.m */; };
+		04C86025222FB097004469DC /* CustomNavgationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C86024222FB097004469DC /* CustomNavgationController.m */; };
 		B94C1B901CD1B22F008EDDF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B8F1CD1B22F008EDDF7 /* main.m */; };
 		B94C1B931CD1B22F008EDDF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B921CD1B22F008EDDF7 /* AppDelegate.m */; };
 		B94C1B961CD1B22F008EDDF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C1B951CD1B22F008EDDF7 /* ViewController.m */; };
@@ -19,6 +20,8 @@
 /* Begin PBXFileReference section */
 		040CBF39222E56460014F9F0 /* CustomPopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPopOverView.h; sourceTree = "<group>"; };
 		040CBF3A222E56460014F9F0 /* CustomPopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPopOverView.m; sourceTree = "<group>"; };
+		04C86023222FB097004469DC /* CustomNavgationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomNavgationController.h; sourceTree = "<group>"; };
+		04C86024222FB097004469DC /* CustomNavgationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomNavgationController.m; sourceTree = "<group>"; };
 		B94C1B8B1CD1B22F008EDDF7 /* CustomPopOverView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomPopOverView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94C1B8F1CD1B22F008EDDF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B94C1B911CD1B22F008EDDF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -76,6 +79,8 @@
 				B94C1B921CD1B22F008EDDF7 /* AppDelegate.m */,
 				B94C1B941CD1B22F008EDDF7 /* ViewController.h */,
 				B94C1B951CD1B22F008EDDF7 /* ViewController.m */,
+				04C86023222FB097004469DC /* CustomNavgationController.h */,
+				04C86024222FB097004469DC /* CustomNavgationController.m */,
 				B94C1B971CD1B22F008EDDF7 /* Main.storyboard */,
 				B94C1B9A1CD1B22F008EDDF7 /* Assets.xcassets */,
 				B94C1B9C1CD1B22F008EDDF7 /* LaunchScreen.storyboard */,
@@ -167,6 +172,7 @@
 				B94C1B931CD1B22F008EDDF7 /* AppDelegate.m in Sources */,
 				B94C1B901CD1B22F008EDDF7 /* main.m in Sources */,
 				040CBF3B222E56460014F9F0 /* CustomPopOverView.m in Sources */,
+				04C86025222FB097004469DC /* CustomNavgationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

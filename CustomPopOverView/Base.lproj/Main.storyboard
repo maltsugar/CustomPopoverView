@@ -22,11 +22,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UhQ-99-2Eh" userLabel="line">
-                                <rect key="frame" x="0.0" y="318.5" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="418.5" width="375" height="30"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.47058823529999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWV-mC-pmC">
-                                <rect key="frame" x="172.5" y="318.5" width="30" height="30"/>
+                                <rect key="frame" x="172.5" y="418.5" width="30" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="test"/>
                                 <connections>
@@ -58,7 +58,7 @@
                             <constraint firstItem="SgM-C9-Qc9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="138" id="WsM-sB-my6"/>
                             <constraint firstItem="3yZ-Vc-QaU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ke5-Dv-Vcg"/>
                             <constraint firstItem="UhQ-99-2Eh" firstAttribute="centerY" secondItem="sWV-mC-pmC" secondAttribute="centerY" id="lmr-Xr-sTW"/>
-                            <constraint firstItem="sWV-mC-pmC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="oAs-dF-dZ6"/>
+                            <constraint firstItem="sWV-mC-pmC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="100" id="oAs-dF-dZ6"/>
                             <constraint firstItem="UhQ-99-2Eh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qGT-xd-c7x"/>
                             <constraint firstItem="UhQ-99-2Eh" firstAttribute="height" secondItem="sWV-mC-pmC" secondAttribute="height" id="zOw-OM-188"/>
                         </constraints>
@@ -69,10 +69,11 @@
             </objects>
             <point key="canvasLocation" x="1186.4000000000001" y="311.69415292353824"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navgation Controller-->
         <scene sceneID="dYt-qX-h6k">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Oaa-LF-L53" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kqz-QN-Ag3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Oaa-LF-L53" customClass="CustomNavgationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="17o-mc-cQ6">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -83,7 +84,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="pbB-gQ-Vgb"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kqz-QN-Ag3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-270" y="226"/>
         </scene>

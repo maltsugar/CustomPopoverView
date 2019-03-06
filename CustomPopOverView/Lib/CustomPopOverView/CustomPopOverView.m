@@ -14,13 +14,33 @@
 ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale) : [UIScreen mainScreen].bounds.size)
 
 
-@implementation PopOverVieConfiguration
+@implementation CPShowStyle
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        
+        _triAngelHeight = 8.0;
+        _triAngelWidth = 10.0;
+        _roundMargin = 10.0;
+        _showSpace = 5.f;
+        _containerBorderWidth = 0.5f;
+        _containerBorderColor = [UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1];
+        _shadowColor = [UIColor colorWithRed:(102/255.0) green:(102/255.0) blue:(102/255.0) alpha:1];
+        _containerBackgroudColor = [UIColor colorWithRed:(238/255.0) green:(238/255.0) blue:(238/255.0) alpha:1];
+        _containerCornerRadius = 5.0;
         _shouldDismissOnTouchOutside = YES;
         _isNeedAnimate = YES;
+        
+        
+        // 普通用法
+        _defaultRowHeight = 44.f;
+        _tableBackgroundColor = [UIColor whiteColor];
+        _separatorColor = [UIColor blackColor];
+        _separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _textColor = [UIColor blackColor];
+        _font = [UIFont systemFontOfSize:14.0];
+
     }
     return self;
 }
@@ -42,21 +62,20 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
 
 @property (nonatomic, strong) CAShapeLayer *popLayer;
 @property (nonatomic, assign) CGFloat  apexOftriangelX; // 小三角顶部X值
-@property (nonatomic, strong) UIColor *layerColor;
-@property (nonatomic, strong) PopOverVieConfiguration *config;
+@property (nonatomic, strong) CPShowStyle *style;
 @property (nonatomic, assign) FinalPosition finalPosition; // 最终计算后的位置
 
 @end
 
 @implementation PopOverContainerView
 
-- (instancetype)initWithConfig:(PopOverVieConfiguration *)config
+- (instancetype)initWithStyle:(CPShowStyle *)style
 {
     self = [super init];
     if (self) {
         // monitor frame property
         [self addObserver:self forKeyPath:@"frame" options:0 context:NULL];
-        _config = config;
+        _style = style;
     }
     return self;
 }
@@ -95,51 +114,57 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
         apexOfTriangelX = _apexOftriangelX;
     }
     
-        
+    
+    CGFloat borderRadius = _style.containerCornerRadius;
+    
     // triangel must between left corner and right corner
-    if (apexOfTriangelX > frame.size.width - _config.containerViewCornerRadius) {
-        apexOfTriangelX = frame.size.width - _config.containerViewCornerRadius - 0.5 * _config.triAngelWidth;
-    }else if (apexOfTriangelX < _config.containerViewCornerRadius) {
-        apexOfTriangelX = _config.containerViewCornerRadius + 0.5 * _config.triAngelWidth;
+    if (apexOfTriangelX > frame.size.width - borderRadius) {
+        apexOfTriangelX = frame.size.width - borderRadius - 0.5 * _style.triAngelWidth;
+    }else if (apexOfTriangelX < borderRadius) {
+        apexOfTriangelX = borderRadius + 0.5 * _style.triAngelWidth;
     }
     
+    
+    
     CGPoint point0 = CGPointMake(apexOfTriangelX, 0);
-    CGPoint point1 = CGPointMake(apexOfTriangelX - 0.5 * _config.triAngelWidth, _config.triAngelHeight);
-    CGPoint point2 = CGPointMake(_config.containerViewCornerRadius, _config.triAngelHeight);
-    CGPoint point2_center = CGPointMake(_config.containerViewCornerRadius, _config.triAngelHeight + _config.containerViewCornerRadius);
+    CGPoint point1 = CGPointMake(apexOfTriangelX - 0.5 * _style.triAngelWidth, _style.triAngelHeight);
+    CGPoint point2 = CGPointMake(borderRadius, _style.triAngelHeight);
+    CGPoint point2_center = CGPointMake(borderRadius, _style.triAngelHeight + borderRadius);
     
-    CGPoint point3 = CGPointMake(0, frame.size.height - _config.containerViewCornerRadius);
-    CGPoint point3_center = CGPointMake(_config.containerViewCornerRadius, frame.size.height - _config.containerViewCornerRadius);
+    CGPoint point3 = CGPointMake(0, frame.size.height - _style.containerCornerRadius);
+    CGPoint point3_center = CGPointMake(borderRadius, frame.size.height - borderRadius);
     
-    CGPoint point4 = CGPointMake(frame.size.width - _config.containerViewCornerRadius, frame.size.height);
-    CGPoint point4_center = CGPointMake(frame.size.width - _config.containerViewCornerRadius, frame.size.height - _config.containerViewCornerRadius);
+    CGPoint point4 = CGPointMake(frame.size.width - borderRadius, frame.size.height);
+    CGPoint point4_center = CGPointMake(frame.size.width - borderRadius, frame.size.height - borderRadius);
     
-    CGPoint point5 = CGPointMake(frame.size.width, _config.triAngelHeight + _config.containerViewCornerRadius);
-    CGPoint point5_center = CGPointMake(frame.size.width - _config.containerViewCornerRadius, _config.triAngelHeight + _config.containerViewCornerRadius);
+    CGPoint point5 = CGPointMake(frame.size.width, _style.triAngelHeight + borderRadius);
+    CGPoint point5_center = CGPointMake(frame.size.width - borderRadius, _style.triAngelHeight + borderRadius);
     
-    CGPoint point6 = CGPointMake(apexOfTriangelX + 0.5 * _config.triAngelWidth, _config.triAngelHeight);
+    CGPoint point6 = CGPointMake(apexOfTriangelX + 0.5 * _style.triAngelWidth, _style.triAngelHeight);
     
     
     if (_finalPosition == FinalPositionUp) {
         CGFloat maxY = CGRectGetHeight(frame);
         
         point0 = CGPointMake(apexOfTriangelX, maxY);
-        point1 = CGPointMake(apexOfTriangelX - 0.5 * _config.triAngelWidth, maxY - _config.triAngelHeight);
+        point1 = CGPointMake(apexOfTriangelX - 0.5 * _style.triAngelWidth, maxY - _style.triAngelHeight);
         
-        point2 = CGPointMake(_config.containerViewCornerRadius, maxY - _config.triAngelHeight);
-        point2_center = CGPointMake(_config.containerViewCornerRadius, maxY - (_config.triAngelHeight + _config.containerViewCornerRadius));
+        point2 = CGPointMake(borderRadius, maxY - _style.triAngelHeight);
+        point2_center = CGPointMake(borderRadius, maxY - (_style.triAngelHeight + borderRadius));
         
-        point3 = CGPointMake(0, maxY - (frame.size.height - _config.containerViewCornerRadius));
-        point3_center = CGPointMake(_config.containerViewCornerRadius, maxY - (frame.size.height - _config.containerViewCornerRadius));
+        point3 = CGPointMake(0, maxY - (frame.size.height - borderRadius));
+        point3_center = CGPointMake(borderRadius, maxY - (frame.size.height - borderRadius));
         
-        point4 = CGPointMake(frame.size.width - _config.containerViewCornerRadius, maxY - frame.size.height);
-        point4_center = CGPointMake(frame.size.width - _config.containerViewCornerRadius, maxY - (frame.size.height - _config.containerViewCornerRadius));
+        point4 = CGPointMake(frame.size.width - borderRadius, maxY - frame.size.height);
+        point4_center = CGPointMake(frame.size.width - borderRadius, maxY - (frame.size.height - borderRadius));
         
-        point5 = CGPointMake(frame.size.width, maxY - (_config.triAngelHeight + _config.containerViewCornerRadius));
-        point5_center = CGPointMake(frame.size.width - _config.containerViewCornerRadius, maxY - (_config.triAngelHeight + _config.containerViewCornerRadius));
+        point5 = CGPointMake(frame.size.width, maxY - (_style.triAngelHeight + borderRadius));
+        point5_center = CGPointMake(frame.size.width - borderRadius, maxY - (_style.triAngelHeight + borderRadius));
         
-        point6 = CGPointMake(apexOfTriangelX + 0.5 * _config.triAngelWidth, maxY - _config.triAngelHeight);
+        point6 = CGPointMake(apexOfTriangelX + 0.5 * _style.triAngelWidth, maxY - _style.triAngelHeight);
     }
+    
+    
     
     
     UIBezierPath *path = [UIBezierPath bezierPath];
@@ -149,37 +174,37 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     
     [path addLineToPoint:point2];
     if (_finalPosition == FinalPositionDown) {
-        [path addArcWithCenter:point2_center radius:_config.containerViewCornerRadius startAngle:3*M_PI_2 endAngle:M_PI clockwise:NO];
+        [path addArcWithCenter:point2_center radius:borderRadius startAngle:3*M_PI_2 endAngle:M_PI clockwise:NO];
     }else
     {
-        [path addArcWithCenter:point2_center radius:_config.containerViewCornerRadius startAngle:M_PI_2 endAngle:M_PI clockwise:YES];
+        [path addArcWithCenter:point2_center radius:borderRadius startAngle:M_PI_2 endAngle:M_PI clockwise:YES];
     }
     
     [path addLineToPoint:point3];
     if (_finalPosition == FinalPositionDown) {
-        [path addArcWithCenter:point3_center radius:_config.containerViewCornerRadius startAngle:M_PI endAngle:M_PI_2 clockwise:NO];
+        [path addArcWithCenter:point3_center radius:borderRadius startAngle:M_PI endAngle:M_PI_2 clockwise:NO];
     }else
     {
-        [path addArcWithCenter:point3_center radius:_config.containerViewCornerRadius startAngle:M_PI endAngle:3*M_PI_2 clockwise:YES];
+        [path addArcWithCenter:point3_center radius:borderRadius startAngle:M_PI endAngle:3*M_PI_2 clockwise:YES];
     }
     
 
     
     [path addLineToPoint:point4];
     if (_finalPosition == FinalPositionDown) {
-        [path addArcWithCenter:point4_center radius:_config.containerViewCornerRadius startAngle:M_PI_2 endAngle:0 clockwise:NO];
+        [path addArcWithCenter:point4_center radius:borderRadius startAngle:M_PI_2 endAngle:0 clockwise:NO];
     }else
     {
-        [path addArcWithCenter:point4_center radius:_config.containerViewCornerRadius startAngle:3*M_PI_2 endAngle:0 clockwise:YES];
+        [path addArcWithCenter:point4_center radius:borderRadius startAngle:3*M_PI_2 endAngle:0 clockwise:YES];
     }
 
 
     [path addLineToPoint:point5];
     if (_finalPosition == FinalPositionDown) {
-        [path addArcWithCenter:point5_center radius:_config.containerViewCornerRadius startAngle:0 endAngle:3*M_PI_2 clockwise:NO];
+        [path addArcWithCenter:point5_center radius:borderRadius startAngle:0 endAngle:3*M_PI_2 clockwise:NO];
     }else
     {
-        [path addArcWithCenter:point5_center radius:_config.containerViewCornerRadius startAngle:0 endAngle:M_PI_2 clockwise:YES];
+        [path addArcWithCenter:point5_center radius:borderRadius startAngle:0 endAngle:M_PI_2 clockwise:YES];
     }
     
 
@@ -190,7 +215,25 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     
     
     self.popLayer.path = path.CGPath;
-    self.popLayer.fillColor = _layerColor? _layerColor.CGColor : [UIColor orangeColor].CGColor;
+    self.popLayer.fillColor = _style.containerBackgroudColor ? _style.containerBackgroudColor.CGColor : [UIColor orangeColor].CGColor;
+    
+    
+    CGFloat lineWidth = _style.containerBorderWidth;
+    
+    if (lineWidth > 0.4) {
+        self.popLayer.lineWidth = lineWidth;
+        self.popLayer.strokeColor = _style.containerBorderColor.CGColor;
+    }else
+    {
+        self.popLayer.borderWidth = 0;
+    }
+    
+    if (_style.shadowColor) {
+        self.popLayer.shadowPath = path.CGPath;
+        self.popLayer.shadowOffset = CGSizeMake(0, 3);
+        self.popLayer.shadowOpacity = 0.75;
+        self.popLayer.shadowColor = _style.shadowColor.CGColor;
+    }
     
 }
 
@@ -199,12 +242,6 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     _apexOftriangelX = apexOftriangelX;
     [self setLayerFrame:self.frame];
     
-}
-
-- (void)setLayerColor:(UIColor *)layerColor
-{
-    _layerColor = layerColor;
-    [self setLayerFrame:self.frame];
 }
 
 //- (void)didMoveToSuperview
@@ -229,7 +266,7 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
 
                 /*==================================IMPLEMENTATION=================================================*/
 
-@interface CustomPopOverView () <UITableViewDelegate, UITableViewDataSource>
+@interface CustomPopOverView () <UITableViewDelegate, UITableViewDataSource, CAAnimationDelegate>
 {
     CGRect _contentOrignFrame;
 }
@@ -245,6 +282,8 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
 @end
 
 
+static NSString* _dimissAnimationKey = @"_dimissAnimation";
+
 @implementation CustomPopOverView
 
 + (instancetype)popOverView
@@ -252,38 +291,20 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     return [[self alloc]init];
 }
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        [self initDefaultConfig];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cpScreenOrientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
-    }
-    return self;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self initDefaultConfig];
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cpScreenOrientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
     return self;
 }
 
-- (instancetype)initWithBounds:(CGRect)bounds titleMenus:(NSArray *)titles config:(PopOverVieConfiguration *)config
+- (instancetype)initWithBounds:(CGRect)bounds titleMenus:(NSArray *)titles style:(CPShowStyle *)style
 {
     self = [super initWithFrame:bounds];
     if (self) {
-        if (!config) {
-            [self initDefaultConfig];
-        }else
-        {
-            _config = config;
-        }
-        
+        _style = style;
         self.titleMenus = titles;
         
         self.table.frame = CGRectMake(0, 0, CGRectGetWidth(bounds), CGRectGetHeight(bounds));
@@ -303,23 +324,15 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
             [_table setLayoutMargins:UIEdgeInsetsZero];
             
         }
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cpScreenOrientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
     }
     return self;
 }
 
-- (instancetype)initWithBounds:(CGRect)bounds titleInfo:(NSArray <NSDictionary<NSString *,NSString *> *>*)infoes config:(PopOverVieConfiguration *)config
+- (instancetype)initWithBounds:(CGRect)bounds titleInfo:(NSArray <NSDictionary<NSString *,NSString *> *>*)infoes style:(CPShowStyle *)style
 {
     self = [super initWithFrame:bounds];
     if (self) {
-        if (!config) {
-            [self initDefaultConfig];
-        }else
-        {
-            _config = config;
-        }
-        
+        _style = style;
         self.titleInfoes = infoes;
         
         self.table.frame = CGRectMake(0, 0, CGRectGetWidth(bounds), CGRectGetHeight(bounds));
@@ -339,29 +352,8 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
             [_table setLayoutMargins:UIEdgeInsetsZero];
             
         }
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cpScreenOrientationChange) name:UIDeviceOrientationDidChangeNotification object:nil];
-        
     }
     return self;
-}
-
-- (void)initDefaultConfig
-{
-    _config = [PopOverVieConfiguration new];
-    _config.triAngelHeight = 8.0;
-    _config.triAngelWidth = 10.0;
-    _config.containerViewCornerRadius = 5.0;
-    _config.roundMargin = 10.0;
-    _config.showSpace = 5.f;
-    
-    // 普通用法
-    _config.defaultRowHeight = 44.f;
-    _config.tableBackgroundColor = [UIColor whiteColor];
-    _config.separatorColor = [UIColor blackColor];
-    _config.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    _config.textColor = [UIColor blackColor];
-    _config.font = [UIFont systemFontOfSize:14.0];
 }
 
 - (void)setContent:(UIView *)content
@@ -370,16 +362,16 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     
     CGRect contentFrame = content.frame;
     
-    contentFrame.origin.x = _config.roundMargin;
-    contentFrame.origin.y = _config.triAngelHeight + _config.roundMargin;
+    contentFrame.origin.x = self.style.roundMargin;
+    contentFrame.origin.y = self.style.triAngelHeight + self.style.roundMargin;
     content.frame = contentFrame;
     
     
     _contentOrignFrame = contentFrame;
     
     CGRect  temp = self.containerView.frame;
-    temp.size.width = CGRectGetMaxX(contentFrame) + _config.roundMargin; // left and right space
-    temp.size.height = CGRectGetMaxY(contentFrame) + _config.roundMargin;
+    temp.size.width = CGRectGetMaxX(contentFrame) + self.style.roundMargin; // left and right space
+    temp.size.height = CGRectGetMaxY(contentFrame) + self.style.roundMargin;
     
     self.containerView.frame = temp;
     
@@ -398,14 +390,6 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     [self setContent:_contentViewController.view];
     
 }
-
-- (void)setContainerBackgroudColor:(UIColor *)containerBackgroudColor
-{
-    _containerBackgroudColor = containerBackgroudColor;
-    self.containerView.layerColor = _containerBackgroudColor;
-}
-
-
 
 - (void)showFrom:(UIView *)from alignStyle:(CPAlignStyle)style
 {
@@ -428,16 +412,29 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
         [self.delegate popOverViewDidShow:self];
     }
     
-    if (_config.isNeedAnimate) {
+    if (self.style.isNeedAnimate) {
         // animations support
-        self.containerView.transform = CGAffineTransformMakeScale(1.1,1.1);
-        self.containerView.alpha = 0;
+        CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        scaleAnimation.fromValue = @1.1;
+        scaleAnimation.toValue = @1.0;
+        scaleAnimation.duration = 0.2;
+        scaleAnimation.removedOnCompletion = NO;
+        scaleAnimation.fillMode = kCAFillModeForwards;
         
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.2];
-        self.containerView.transform = CGAffineTransformMakeScale(1.0,1.0);
-        self.containerView.alpha = 1;
-        [UIView commitAnimations];
+        
+        CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        alphaAnimation.fromValue = @0.0;
+        alphaAnimation.toValue = @1.0;
+        alphaAnimation.duration = 0.2;
+        alphaAnimation.removedOnCompletion = NO;
+        alphaAnimation.fillMode = kCAFillModeForwards;
+        
+        CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
+        group.animations = @[scaleAnimation, alphaAnimation];
+        group.timingFunction = [CAMediaTimingFunction functionWithName:@"easeIn"];
+        
+        [self.containerView.layer addAnimation:group forKey:@"containerAnimate0"];
+
     }
     
     
@@ -448,14 +445,32 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
 
 - (void)dismiss
 {
-    if (_config.isNeedAnimate) {
+    if (self.style.isNeedAnimate) {
         // animations support
-        [UIView animateWithDuration:0.2 animations:^{
-            self.containerView.transform = CGAffineTransformMakeScale(0.9,0.9);
-            self.containerView.alpha = 0;
-        } completion:^(BOOL finished) {
-            [self removeFromSuperview];
-        }];
+
+        CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        scaleAnimation.fromValue = @1.0;
+        scaleAnimation.toValue = @0.85;
+        scaleAnimation.duration = 0.2;
+        scaleAnimation.removedOnCompletion = NO;
+        scaleAnimation.fillMode = kCAFillModeForwards;
+        
+        CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        alphaAnimation.fromValue = @1.0;
+        alphaAnimation.toValue = @0.0;
+        alphaAnimation.duration = 0.2;
+        alphaAnimation.removedOnCompletion = NO;
+        alphaAnimation.fillMode = kCAFillModeForwards;
+        
+        
+        CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
+        group.animations = @[scaleAnimation, alphaAnimation];
+        group.delegate = self;
+        group.removedOnCompletion = NO;
+        group.timingFunction = [CAMediaTimingFunction functionWithName:@"easeOut"];
+        
+        [self.containerView.layer addAnimation:group forKey:_dimissAnimationKey];
+        
     }else
     {
         [self removeFromSuperview];
@@ -469,9 +484,23 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     }
 }
 
+#pragma mark- CAAnimationDelegate
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    // 动画完成
+    if (flag) {
+        CAAnimation *dissmissAnimation = [self.containerView.layer animationForKey:_dimissAnimationKey];
+        if (dissmissAnimation == anim) {
+            [self removeFromSuperview];
+        }
+    }
+}
+
+
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (self.config.shouldDismissOnTouchOutside) {
+    if (self.style.shouldDismissOnTouchOutside) {
         [self dismiss];
     }
 }
@@ -510,36 +539,36 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
         case CPContentPositionAlwaysDown:
         {
             self.containerView.finalPosition = FinalPositionDown;
-            containerViewFrame.origin.y =  CGRectGetMaxY(newFrame) + _config.showSpace;
+            containerViewFrame.origin.y =  CGRectGetMaxY(newFrame) + self.style.showSpace;
         }
             break;
         case CPContentPositionAlwaysUp:
         {
             self.containerView.finalPosition = FinalPositionUp;
-            containerViewFrame.origin.y = CGRectGetMinY(newFrame) - _config.showSpace - containerViewFrame.size.height;
+            containerViewFrame.origin.y = CGRectGetMinY(newFrame) - self.style.showSpace - containerViewFrame.size.height;
         
-            contentFrame.origin.y = _config.roundMargin;
+            contentFrame.origin.y = self.style.roundMargin;
         }
             break;
             
             case CPContentPositionAutomaticUpFirst:
         {
-            containerViewFrame.origin.y = CGRectGetMinY(newFrame) - _config.showSpace - containerViewFrame.size.height;
+            containerViewFrame.origin.y = CGRectGetMinY(newFrame) - self.style.showSpace - containerViewFrame.size.height;
             self.containerView.finalPosition = FinalPositionUp;
-            contentFrame.origin.y = _config.roundMargin;
+            contentFrame.origin.y = self.style.roundMargin;
             
             if (CGRectGetMinY(containerViewFrame) < safeInsets.top) {
                 // 超出屏幕， 向下
                 self.containerView.finalPosition = FinalPositionDown;
-                containerViewFrame.origin.y = CGRectGetMaxY(newFrame) + _config.showSpace;
-                contentFrame.origin.y = _config.triAngelHeight + _config.roundMargin;
+                containerViewFrame.origin.y = CGRectGetMaxY(newFrame) + self.style.showSpace;
+                contentFrame.origin.y = self.style.triAngelHeight + self.style.roundMargin;
             }
         }
             break;
             
         default:
         {
-            containerViewFrame.origin.y =  CGRectGetMaxY(newFrame) + _config.showSpace;
+            containerViewFrame.origin.y =  CGRectGetMaxY(newFrame) + self.style.showSpace;
             self.containerView.finalPosition = FinalPositionDown;
             
             
@@ -552,8 +581,8 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
             if (CGRectGetMaxY(containerViewFrame) > (totalHeight - safeInsets.bottom)) {
                 // 超出屏幕， 向上
                 self.containerView.finalPosition = FinalPositionUp;
-                containerViewFrame.origin.y = CGRectGetMinY(newFrame) - _config.showSpace - containerViewFrame.size.height;
-                contentFrame.origin.y = _config.roundMargin;
+                containerViewFrame.origin.y = CGRectGetMinY(newFrame) - self.style.showSpace - containerViewFrame.size.height;
+                contentFrame.origin.y = self.style.roundMargin;
             }
         }
             break;
@@ -600,6 +629,11 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self updateSubViewFrames];
+}
 
 
 #pragma mark- KVC
@@ -617,39 +651,6 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
         }
     }
 }
-
-#pragma mark- Notis
-
-- (void)cpScreenOrientationChange
-{
-    [self updateSubViewFrames];
-}
-
-#pragma mark- lazy
-- (PopOverContainerView *)containerView
-{
-    if (nil == _containerView) {
-        _containerView = [[PopOverContainerView alloc]initWithConfig:_config];
-        [self addSubview:_containerView];
-    }
-    
-    return _containerView;
-}
-
-- (UITableView *)table
-{
-    if (nil == _table) {
-        _table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
-        //        _table.backgroundView = nil;
-        _table.backgroundColor = _config.tableBackgroundColor;
-        _table.separatorColor = _config.separatorColor;
-        _table.rowHeight = _config.defaultRowHeight?:44.f;
-        _table.separatorStyle = _config.separatorStyle?:UITableViewCellSeparatorStyleSingleLine;
-        _table.tableFooterView = [UIView new];
-    }
-    return _table;
-}
-
 
 
 #pragma mark- <UITableViewDelegate, UITableViewDataSource>
@@ -680,9 +681,9 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     }
     
     cell.textLabel.text = text;
-    cell.textLabel.textColor = _config.textColor;
-    cell.textLabel.font = _config.font;
-    cell.textLabel.textAlignment = _config.textAlignment;
+    cell.textLabel.textColor = self.style.textColor;
+    cell.textLabel.font = self.style.font;
+    cell.textLabel.textAlignment = self.style.textAlignment;
     cell.imageView.image = [UIImage imageNamed:icon];
     
     return cell;
@@ -713,10 +714,42 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     
 }
 
+
+#pragma mark- lazy
+- (PopOverContainerView *)containerView
+{
+    if (nil == _containerView) {
+        _containerView = [[PopOverContainerView alloc]initWithStyle:self.style];
+        [self addSubview:_containerView];
+    }
+    
+    return _containerView;
+}
+
+- (UITableView *)table
+{
+    if (nil == _table) {
+        _table = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+        //        _table.backgroundView = nil;
+        _table.backgroundColor = self.style.tableBackgroundColor;
+        _table.separatorColor = self.style.separatorColor;
+        _table.rowHeight = self.style.defaultRowHeight?:44.f;
+        _table.separatorStyle = self.style.separatorStyle?:UITableViewCellSeparatorStyleSingleLine;
+        _table.tableFooterView = [UIView new];
+    }
+    return _table;
+}
+- (CPShowStyle *)style
+{
+    if (nil == _style) {
+        _style = [CPShowStyle new];
+    }
+    return _style;
+}
+
 #pragma mark- 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_table removeObserver:self forKeyPath:@"contentSize"];
 //    NSLog(@"%s", __func__);
 }
