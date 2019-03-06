@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "CustomPopOverView"
-  spec.version      = "1.0.4"
+  spec.version      = "1.0.5"
   spec.summary      = "一款小巧灵活的自定义弹出视图, 可以做自定义AlertView、弹出窗口等等, A tiny and sweet custom popView (pop popup)"
 
   # This description is used to generate tags and improve search results.
@@ -91,7 +91,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files = "CustomPopOverView", "CustomPopOverView/Lib/CustomPopOverView/*.{h,m}"
+  spec.source_files = CustomPopOverView/Lib/CustomPopOverView/*.{h,m}"
   spec.framework  = "UIKit"
 
   # spec.public_header_files = "Classes/**/*.h"

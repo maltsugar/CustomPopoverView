@@ -17,19 +17,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
-    NSLog(@" %@", [self timeFrom1900]);
+    // Override point for customization after application launch.    
     return YES;
 }
-- (NSString *)timeFrom1900
-{
-    struct timeval tv;
-    gettimeofday(&tv,NULL);
-    long currentTime =  tv.tv_sec * 1000 + tv.tv_usec / 1000;
-    
-    return @(currentTime + 2209017600000).stringValue;
-}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
