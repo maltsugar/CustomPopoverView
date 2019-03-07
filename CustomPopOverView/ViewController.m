@@ -121,19 +121,18 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
     CustomPopOverView *view = [CustomPopOverView popOverView];
     view.style.containerBorderWidth = 0.5;
     view.style.containerBorderColor = UIColor.lightGrayColor;
+//    view.style.isNeedAnimate = NO;
     
     view.contentViewController = vc;
     
     [view showFrom:_leftBtn alignStyle:CPAlignStyleLeft relativePosition:CPContentPositionAutomaticUpFirst];
-    
     
 }
 
 - (IBAction)testClick:(UIButton *)sender {
     
     kGYCancelSameActionInTime(1);
-    NSLog(@"---");
-    
+
     _titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
     CPShowStyle *style = [CPShowStyle new];
     style.triAngelHeight = 6.0;
@@ -239,14 +238,14 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
 #pragma mark- CustomPopOverViewDelegate
 
 
-- (void)popOverViewDidShow:(CustomPopOverView *)pView
-{
-    NSLog(@"popOverViewDidShow");
-}
-- (void)popOverViewDidDismiss:(CustomPopOverView *)pView
-{
-    NSLog(@"popOverViewDidDismiss");
-}
+//- (void)popOverViewDidShow:(CustomPopOverView *)pView
+//{
+//    NSLog(@"popOverViewDidShow");
+//}
+//- (void)popOverViewDidDismiss:(CustomPopOverView *)pView
+//{
+//    NSLog(@"popOverViewDidDismiss");
+//}
 
 - (void)popOverView:(CustomPopOverView *)pView didClickMenuIndex:(NSInteger)index
 {

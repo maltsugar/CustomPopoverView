@@ -14,6 +14,8 @@
 ([[UIScreen mainScreen] respondsToSelector:@selector(nativeBounds)] ? CGSizeMake([UIScreen mainScreen].nativeBounds.size.width/[UIScreen mainScreen].nativeScale,[UIScreen mainScreen].nativeBounds.size.height/[UIScreen mainScreen].nativeScale) : [UIScreen mainScreen].bounds.size)
 
 
+static BOOL __enableDebugLog = NO;
+
 @implementation CPShowStyle
 - (instancetype)init
 {
@@ -45,9 +47,21 @@
     return self;
 }
 
+- (void)dealloc
+{
+    if (__enableDebugLog) {
+        NSLog(@"%s", __func__);
+    }
+}
+
 @end
 
 
+@interface CPAnimatorDelegate : NSObject <CAAnimationDelegate>
+
+@property (nonatomic,   weak) CustomPopOverView *popView;
+
+@end
 
 
 
@@ -256,6 +270,9 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
 - (void)dealloc
 {
     [self removeObserver:self forKeyPath:@"frame"];
+    if (__enableDebugLog) {
+        NSLog(@"%s", __func__);
+    }
 }
 
 
@@ -266,7 +283,7 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
 
                 /*==================================IMPLEMENTATION=================================================*/
 
-@interface CustomPopOverView () <UITableViewDelegate, UITableViewDataSource, CAAnimationDelegate>
+@interface CustomPopOverView () <UITableViewDelegate, UITableViewDataSource>
 {
     CGRect _contentOrignFrame;
 }
@@ -278,6 +295,10 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
 @property (nonatomic, assign) CPAlignStyle alignStyle;
 @property (nonatomic, assign) CPContentPosition contentPosition;
 @property (nonatomic,   weak) UIView *showFrom;
+
+
+@property (nonatomic, assign) BOOL isAnimating;
+@property (nonatomic, strong) CPAnimatorDelegate *animatorDelegate;
 
 @end
 
@@ -399,7 +420,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
 - (void)showFrom:(UIView *)from alignStyle:(CPAlignStyle)style relativePosition:(CPContentPosition)position
 {
     _contentPosition = position;
-    _showFrom = from;
+    self.showFrom = from;
     _alignStyle = style;
     
     
@@ -448,6 +469,10 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     if (self.style.isNeedAnimate) {
         // animations support
 
+        if (_isAnimating) { return; }
+        
+        
+        _isAnimating = YES;
         CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         scaleAnimation.fromValue = @1.0;
         scaleAnimation.toValue = @0.85;
@@ -465,7 +490,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         
         CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
         group.animations = @[scaleAnimation, alphaAnimation];
-        group.delegate = self;
+        group.delegate = self.animatorDelegate;
         group.removedOnCompletion = NO;
         group.timingFunction = [CAMediaTimingFunction functionWithName:@"easeOut"];
         
@@ -483,19 +508,6 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         [self.delegate popOverViewDidDismiss:self];
     }
 }
-
-#pragma mark- CAAnimationDelegate
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
-    // 动画完成
-    if (flag) {
-        CAAnimation *dissmissAnimation = [self.containerView.layer animationForKey:_dimissAnimationKey];
-        if (dissmissAnimation == anim) {
-            [self removeFromSuperview];
-        }
-    }
-}
-
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -747,13 +759,56 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     return _style;
 }
 
+- (CPAnimatorDelegate *)animatorDelegate
+{
+    if (nil == _animatorDelegate) {
+        _animatorDelegate = [[CPAnimatorDelegate alloc]init];
+        _animatorDelegate.popView = self;
+    }
+    return _animatorDelegate;
+}
+
+
 #pragma mark- 
 - (void)dealloc
 {
     [_table removeObserver:self forKeyPath:@"contentSize"];
-//    NSLog(@"%s", __func__);
+    if (__enableDebugLog) {
+        NSLog(@"%s", __func__);
+    }
 }
 
 @end
 
 
+
+
+
+
+#pragma mark- CPAnimatorDelegate Implementations
+@implementation CPAnimatorDelegate
+
+// CAAnimationDelegate
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    // 动画完成
+    if (flag) {
+        if (self.popView) {
+            CAAnimation *dissmissAnimation = [self.popView.containerView.layer animationForKey:_dimissAnimationKey];
+            if (dissmissAnimation == anim) {
+                [self.popView setValue:@(NO) forKeyPath:@"isAnimating"];
+                [self.popView removeFromSuperview];
+            }
+        }
+        
+    }
+}
+
+- (void)dealloc
+{
+    if (__enableDebugLog) {
+        NSLog(@"%s", __func__);
+    }
+}
+
+@end
