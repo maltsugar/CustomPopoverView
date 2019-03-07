@@ -696,7 +696,10 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     cell.textLabel.textColor = self.style.textColor;
     cell.textLabel.font = self.style.font;
     cell.textLabel.textAlignment = self.style.textAlignment;
-    cell.imageView.image = [UIImage imageNamed:icon];
+    if (icon.length) {
+        cell.imageView.image = [UIImage imageNamed:icon];
+    }
+    
     
     return cell;
 }
