@@ -48,14 +48,24 @@
                                     <action selector="testClick3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Shk-u2-TzR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrM-ad-wgM">
+                                <rect key="frame" x="229.5" y="164" width="36" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="test4"/>
+                                <connections>
+                                    <action selector="handleTest4:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IA0-s3-R2S"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3yZ-Vc-QaU" secondAttribute="bottom" constant="37" id="3PQ-vE-Bdf"/>
                             <constraint firstItem="SgM-C9-Qc9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="86" id="4pJ-dV-J6d"/>
                             <constraint firstAttribute="trailing" secondItem="UhQ-99-2Eh" secondAttribute="trailing" id="H64-Jw-xaW"/>
+                            <constraint firstItem="LrM-ad-wgM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="60" id="MA6-wZ-V8o"/>
                             <constraint firstItem="sWV-mC-pmC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Oj2-QZ-7O9"/>
                             <constraint firstItem="SgM-C9-Qc9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="138" id="WsM-sB-my6"/>
+                            <constraint firstItem="LrM-ad-wgM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="dR2-YI-iFp"/>
                             <constraint firstItem="3yZ-Vc-QaU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ke5-Dv-Vcg"/>
                             <constraint firstItem="UhQ-99-2Eh" firstAttribute="centerY" secondItem="sWV-mC-pmC" secondAttribute="centerY" id="lmr-Xr-sTW"/>
                             <constraint firstItem="sWV-mC-pmC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="100" id="oAs-dF-dZ6"/>
@@ -72,7 +82,6 @@
         <!--Custom Navgation Controller-->
         <scene sceneID="dYt-qX-h6k">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kqz-QN-Ag3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Oaa-LF-L53" customClass="CustomNavgationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="17o-mc-cQ6">
@@ -84,6 +93,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="pbB-gQ-Vgb"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kqz-QN-Ag3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-270" y="226"/>
         </scene>

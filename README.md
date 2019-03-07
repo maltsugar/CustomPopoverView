@@ -2,13 +2,9 @@
 
 
 # 版本记录
-- 1.0.4 添加阴影、边框粗细、边框颜色等属性（**有些API名字改了**，升级到此版本需要做下小改动）
+- 1.0.6 添加阴影、边框粗细、边框颜色等属性（**有些API名字改了**，升级到此版本需要改动一点点原有代码）
 - 1.0.3 支持设置内容相对呼出的位置的上方或者下方，支持自动调整位置
-- 1.0.1 修复iOS11下，某些情况不能弹出的bug (经过测试，iOS11 在dismissViewControllerAnimated后弹出时，有时候会无法出现，demo直接跑是没有问题的   
-`-showFrom:alignStyle:`下打印
-`UIWindow *window = [[UIApplication sharedApplication].windows lastObject];`
-这个window是`_UIInteractiveHighlightEffectWindow: 0x7fed5857f7e0`，不是keywindow。
-为带来bug的兄弟说声抱歉，可以尝试下修改后的。)
+- 1.0.1 修复iOS11下，某些情况不能弹出的bug
 
 
 # 一款自定义 弹出视图
@@ -37,7 +33,7 @@ view.containerBackgroudColor = [UIColor blueColor];
 CustomPopOverView *view = [CustomPopOverView popOverView];
     
 UIButton *btn = [UIButton buttonWithType:UIButtonTypeInfoDark];
-btn.bounds = CGRectMake(0, 0, 60, 40);
+btn.bounds = CGRectMake(0, 0, 160, 40);
 view.content = btn;    
 [view showFrom:sender alignStyle:CPAlignStyleRight];
 
@@ -65,21 +61,22 @@ view.content = btn;
 
 ### 普通用法（只传一组菜单名称）
 ```
-	_titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
-	PopOverVieConfiguration *config = [PopOverVieConfiguration new];
-    config.triAngelHeight = 5.0;
-    config.triAngelWidth = 7.0;
-    config.containerViewCornerRadius = 3.0;
-    config.roundMargin = 2.0;
-    config.defaultRowHeight = 30;
-    config.tableBackgroundColor = [UIColor grayColor];
-    config.textColor = [UIColor orangeColor];
-	
-	
-	CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) titleMenus:_titles config:config];
-	view.containerBackgroudColor = [UIColor blueColor];
-	view.delegate = self;
-	[view showFrom:sender alignStyle:CPAlignStyleCenter];
+	NSArray *menus = @[@"清空已完成", @"清空全部"];
+    CPShowStyle *style = [CPShowStyle new];
+    style.roundMargin = 5;
+    style.triAngelHeight = 0.0;
+    style.triAngelWidth = 0.0;
+    style.containerCornerRadius = 5.0;
+    style.roundMargin = 10.0;
+    style.showSpace = 5.f;
+    style.containerBackgroudColor = RGBCOLOR(64, 64, 64);
+    style.containerBorderColor = UIColor.orangeColor;
+    style.containerBorderWidth = 2;
+    
+    
+    CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 40, 300) titleMenus:menus style:style];
+    pView.delegate = self;
+    [pView showFrom:nil alignStyle:CPAlignStyleRight];
 ```
 
 ### 如果你有问题欢迎issue，希望你能够喜欢
@@ -112,7 +109,7 @@ view.containerBackgroudColor = [UIColor blueColor];
 CustomPopOverView *view = [CustomPopOverView popOverView];
     
 UIButton *btn = [UIButton buttonWithType:UIButtonTypeInfoDark];
-btn.bounds = CGRectMake(0, 0, 60, 40);
+btn.bounds = CGRectMake(0, 0, 160, 40);
 view.content = btn;    
 [view showFrom:sender alignStyle:CPAlignStyleRight];
 
@@ -138,21 +135,22 @@ view.content = btn;
 
 ### normal use(only needs an array of titles)
 ```
-	_titles = @[@"Menu1", @"Menu2", @"Ah_Menu3"];
-	PopOverVieConfiguration *config = [PopOverVieConfiguration new];
-    config.triAngelHeight = 5.0;
-    config.triAngelWidth = 7.0;
-    config.containerViewCornerRadius = 3.0;
-    config.roundMargin = 2.0;
-    config.defaultRowHeight = 30;
-    config.tableBackgroundColor = [UIColor grayColor];
-    config.textColor = [UIColor orangeColor];
-	
-	
-	CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 200, 44*3) titleMenus:_titles config:config];
-	view.containerBackgroudColor = [UIColor blueColor];
-	view.delegate = self;
-	[view showFrom:sender alignStyle:CPAlignStyleCenter];
+	NSArray *menus = @[@"清空已完成", @"清空全部"];
+    CPShowStyle *style = [CPShowStyle new];
+    style.roundMargin = 5;
+    style.triAngelHeight = 0.0;
+    style.triAngelWidth = 0.0;
+    style.containerCornerRadius = 5.0;
+    style.roundMargin = 10.0;
+    style.showSpace = 5.f;
+    style.containerBackgroudColor = RGBCOLOR(64, 64, 64);
+    style.containerBorderColor = UIColor.orangeColor;
+    style.containerBorderWidth = 2;
+    
+    
+    CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 40, 300) titleMenus:menus style:style];
+    pView.delegate = self;
+    [pView showFrom:nil alignStyle:CPAlignStyleRight];
 ```
 
 ### if you have any question welcome to issue to me，hope you like it!

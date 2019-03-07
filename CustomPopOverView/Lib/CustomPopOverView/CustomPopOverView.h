@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, CPContentPosition) {
 @property (nonatomic, strong) UIColor *shadowColor; // 阴影颜色 默认#666666
 @property (nonatomic, strong) UIColor *containerBackgroudColor; // 弹出视图背景色 默认#eeeeee
 @property (nonatomic, assign) CGFloat containerCornerRadius; // 弹出视图背景的圆角半径
-@property (nonatomic, assign) CGFloat containerBorderWidth; // 边框宽度默认0.5
+@property (nonatomic, assign) CGFloat containerBorderWidth; // 边框宽度默认0.5( 必须 >= 0.5)
 @property (nonatomic, strong) UIColor *containerBorderColor; // 边框颜色 默认#666666
 
 

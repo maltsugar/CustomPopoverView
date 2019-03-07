@@ -166,7 +166,10 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
     CustomPopOverView *view = [CustomPopOverView popOverView];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeInfoDark];
-    btn.bounds = CGRectMake(0, 0, 60, 40);
+    btn.bounds = CGRectMake(0, 0, 160, 40);
+    
+    view.style.containerBorderColor = UIColor.purpleColor;
+    
     view.content = btn;
     
     [view showFrom:sender alignStyle:CPAlignStyleRight relativePosition:CPContentPositionAlwaysUp];
@@ -200,6 +203,36 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
     
     
 }
+
+
+- (IBAction)handleTest4:(UIButton *)sender
+{
+    CPShowStyle *style = [CPShowStyle new];
+    style.triAngelHeight = 10.0;
+    style.triAngelWidth = 7.0;
+    style.containerCornerRadius = 5.0;
+    style.roundMargin = 5.0;
+    style.defaultRowHeight = 30;
+    style.showSpace = 2;
+    style.tableBackgroundColor = [UIColor grayColor];
+    style.textColor = [UIColor orangeColor];
+    style.textAlignment = NSTextAlignmentLeft;
+    style.containerBackgroudColor = [UIColor purpleColor];
+    
+    NSArray *arr = @[
+                     @{@"name": @"羽毛球", @"icon": @"icon_badminton"},
+                     @{@"name": @"篮球", @"icon": @"icon_basketball"},
+                     @{@"name": @"足球", @"icon": @"icon_football"},
+                     @{@"name": @"更多", @"icon": @"icon_more"}
+                     ];
+    
+    CustomPopOverView *view = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, 130, 30*4) titleInfo:arr style:style];
+    
+    view.delegate = self;
+    [view showFrom:sender alignStyle:CPAlignStyleRight relativePosition:CPContentPositionAutomaticUpFirst];
+}
+
+
 
 
 
