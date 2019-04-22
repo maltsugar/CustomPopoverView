@@ -170,7 +170,7 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
     view.style.containerBorderColor = UIColor.purpleColor;
     
     view.content = btn;
-    
+//    view.backgroundColor = UIColor.orangeColor;
     [view showFrom:sender alignStyle:CPAlignStyleRight relativePosition:CPContentPositionAlwaysUp];
 }
 

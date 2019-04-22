@@ -33,7 +33,7 @@ static BOOL __enableDebugLog = NO;
         _containerCornerRadius = 5.0;
         _shouldDismissOnTouchOutside = YES;
         _isNeedAnimate = YES;
-        
+        _animationDuration = 0.2;
         
         // 普通用法
         _defaultRowHeight = 44.f;
@@ -438,7 +438,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         scaleAnimation.fromValue = @1.1;
         scaleAnimation.toValue = @1.0;
-        scaleAnimation.duration = 0.2;
+        scaleAnimation.duration = _style.animationDuration;
         scaleAnimation.removedOnCompletion = NO;
         scaleAnimation.fillMode = kCAFillModeForwards;
         
@@ -446,7 +446,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
         alphaAnimation.fromValue = @0.0;
         alphaAnimation.toValue = @1.0;
-        alphaAnimation.duration = 0.2;
+        alphaAnimation.duration = _style.animationDuration;
         alphaAnimation.removedOnCompletion = NO;
         alphaAnimation.fillMode = kCAFillModeForwards;
         
@@ -455,7 +455,12 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         group.timingFunction = [CAMediaTimingFunction functionWithName:@"easeIn"];
         
         [self.containerView.layer addAnimation:group forKey:@"containerAnimate0"];
-
+        
+        
+        self.alpha = 0;
+        [UIView animateWithDuration:_style.animationDuration delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.alpha = 1;
+        } completion:nil];
     }
     
     
@@ -476,14 +481,14 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         scaleAnimation.fromValue = @1.0;
         scaleAnimation.toValue = @0.85;
-        scaleAnimation.duration = 0.2;
+        scaleAnimation.duration = _style.animationDuration;
         scaleAnimation.removedOnCompletion = NO;
         scaleAnimation.fillMode = kCAFillModeForwards;
         
         CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
         alphaAnimation.fromValue = @1.0;
         alphaAnimation.toValue = @0.0;
-        alphaAnimation.duration = 0.2;
+        alphaAnimation.duration = _style.animationDuration;
         alphaAnimation.removedOnCompletion = NO;
         alphaAnimation.fillMode = kCAFillModeForwards;
         
@@ -495,6 +500,10 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         group.timingFunction = [CAMediaTimingFunction functionWithName:@"easeOut"];
         
         [self.containerView.layer addAnimation:group forKey:_dimissAnimationKey];
+        
+        [UIView animateWithDuration:_style.animationDuration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.alpha = 0.1;
+        } completion:nil];
         
     }else
     {

@@ -2,6 +2,7 @@
 
 
 # 版本记录
+- 1.0.9 添加、移除时视图 动画模式下背景渐变，防止屏幕闪一下
 - 1.0.7 解决一个CoreAnimation内存泄漏问题
 - 1.0.6 添加阴影、边框粗细、边框颜色等属性（**有些API名字改了**，升级到此版本需要改动一点点原有代码）
 - 1.0.3 支持设置内容相对呼出的位置的上方或者下方，支持自动调整位置
@@ -32,10 +33,10 @@ view.containerBackgroudColor = [UIColor blueColor];
 
 <pre><code>
 CustomPopOverView *view = [CustomPopOverView popOverView];
-    
+
 UIButton *btn = [UIButton buttonWithType:UIButtonTypeInfoDark];
 btn.bounds = CGRectMake(0, 0, 160, 40);
-view.content = btn;    
+view.content = btn;
 [view showFrom:sender alignStyle:CPAlignStyleRight];
 
 </code></pre>
@@ -51,11 +52,11 @@ view.content = btn;
     lab.text = @"I'm viewController's view";
     lab.numberOfLines = 0;
     [vc.view addSubview:lab];
-    
+
 
     CustomPopOverView *view = [CustomPopOverView popOverView];
     view.contentViewController = vc;
-    
+
     [view showFrom:_rightBtn alignStyle:CPAlignStyleRight];
 ```
 
@@ -73,8 +74,8 @@ view.content = btn;
     style.containerBackgroudColor = RGBCOLOR(64, 64, 64);
     style.containerBorderColor = UIColor.orangeColor;
     style.containerBorderWidth = 2;
-    
-    
+
+
     CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 40, 300) titleMenus:menus style:style];
     pView.delegate = self;
     [pView showFrom:nil alignStyle:CPAlignStyleRight];
@@ -108,10 +109,10 @@ view.containerBackgroudColor = [UIColor blueColor];
 
 ```
 CustomPopOverView *view = [CustomPopOverView popOverView];
-    
+
 UIButton *btn = [UIButton buttonWithType:UIButtonTypeInfoDark];
 btn.bounds = CGRectMake(0, 0, 160, 40);
-view.content = btn;    
+view.content = btn;
 [view showFrom:sender alignStyle:CPAlignStyleRight];
 
 ```
@@ -126,11 +127,11 @@ view.content = btn;
     lab.text = @"I'm viewController's view";
     lab.numberOfLines = 0;
     [vc.view addSubview:lab];
-    
+
 
     CustomPopOverView *view = [CustomPopOverView popOverView];
     view.contentViewController = vc;
-    
+
     [view showFrom:_rightBtn alignStyle:CPAlignStyleRight];
 ```
 
@@ -147,8 +148,8 @@ view.content = btn;
     style.containerBackgroudColor = RGBCOLOR(64, 64, 64);
     style.containerBorderColor = UIColor.orangeColor;
     style.containerBorderWidth = 2;
-    
-    
+
+
     CustomPopOverView *pView = [[CustomPopOverView alloc]initWithBounds:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width - 40, 300) titleMenus:menus style:style];
     pView.delegate = self;
     [pView showFrom:nil alignStyle:CPAlignStyleRight];

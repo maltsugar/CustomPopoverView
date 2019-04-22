@@ -57,6 +57,7 @@ typedef NS_ENUM(NSUInteger, CPContentPosition) {
 
 @property (nonatomic, assign) BOOL shouldDismissOnTouchOutside; // 点击空白区域是否消失（默认YES）
 @property (nonatomic, assign) BOOL isNeedAnimate; // 开始和消失动画(默认YES)
+@property (nonatomic, assign) CGFloat animationDuration; // 0.2s
 
 // 普通用法配置
 @property (nonatomic, assign) CGFloat defaultRowHeight; // row高度
