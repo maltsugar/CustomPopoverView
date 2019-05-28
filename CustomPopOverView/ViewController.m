@@ -187,6 +187,7 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
     style.textColor = [UIColor orangeColor];
     style.textAlignment = NSTextAlignmentLeft;
     style.containerBackgroudColor = [UIColor greenColor];
+    style.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     NSArray *arr = @[
                      @{@"name": @"羽毛球", @"icon": @"icon_badminton"},

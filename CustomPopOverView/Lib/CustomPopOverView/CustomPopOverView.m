@@ -758,7 +758,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         _table.backgroundColor = self.style.tableBackgroundColor;
         _table.separatorColor = self.style.separatorColor;
         _table.rowHeight = self.style.defaultRowHeight?:44.f;
-        _table.separatorStyle = self.style.separatorStyle?:UITableViewCellSeparatorStyleSingleLine;
+        _table.separatorStyle = self.style.separatorStyle;
         _table.tableFooterView = [UIView new];
     }
     return _table;
