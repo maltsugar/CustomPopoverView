@@ -521,8 +521,12 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    if (self.style.shouldDismissOnTouchOutside) {
-        [self dismiss];
+    UITouch *tch = [touches anyObject];
+    CGRect rect = [self.containerView convertRect:self.containerView.bounds toView:self];
+    if (!CGRectContainsPoint(rect, [tch locationInView:self])) {
+        if (self.style.shouldDismissOnTouchOutside) {
+            [self dismiss];
+        }
     }
 }
 
