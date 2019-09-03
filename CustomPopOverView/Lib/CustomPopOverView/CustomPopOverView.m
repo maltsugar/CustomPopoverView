@@ -474,10 +474,15 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     if (self.style.isNeedAnimate) {
         // animations support
 
-        if (_isAnimating) { return; }
+        if (_isAnimating) {
+            [self resetAnimationStatus];
+            return;
+        }
         
         
         _isAnimating = YES;
+        [self resetAnimationStatus];
+        
         CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         scaleAnimation.fromValue = @1.0;
         scaleAnimation.toValue = @0.85;
@@ -516,6 +521,13 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     if ([self.delegate respondsToSelector:@selector(popOverViewDidDismiss:)]) {
         [self.delegate popOverViewDidDismiss:self];
     }
+}
+
+- (void)resetAnimationStatus
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _isAnimating = NO;
+    });
 }
 
 
