@@ -130,7 +130,7 @@ typedef NS_ENUM(NSUInteger, FinalPosition) {
     
     
     CGFloat borderRadius = _style.containerCornerRadius;
-    
+ 
     // triangel must between left corner and right corner
     if (apexOfTriangelX > frame.size.width - borderRadius) {
         apexOfTriangelX = frame.size.width - borderRadius - 0.5 * _style.triAngelWidth;
@@ -525,8 +525,9 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
 
 - (void)resetAnimationStatus
 {
+    __weak typeof(self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _isAnimating = NO;
+        weakSelf.isAnimating = NO;
     });
 }
 
@@ -632,32 +633,43 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     switch (_alignStyle) {
         case CPAlignStyleCenter:
         {
-            CGPoint center = self.containerView.center;
-            center.x = CGRectGetMidX(newFrame);
-            self.containerView.center = center;
-            
-            self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame)/2;
+            [self excAlignCenter:newFrame];
         }
             break;
         case CPAlignStyleLeft:
         {
-            CGRect frame = self.containerView.frame;
-            frame.origin.x = CGRectGetMinX(newFrame);
-            self.containerView.frame = frame;
-            
-            self.containerView.apexOftriangelX = CGRectGetWidth(_showFrom.frame)/2;
+            [self excAlignLeft:newFrame];
         }
-            
             break;
         case CPAlignStyleRight:
         {
-            CGRect frame = self.containerView.frame;
-            frame.origin.x = CGRectGetMinX(newFrame) - (fabs(frame.size.width - newFrame.size.width));
-            self.containerView.frame = frame;
-            
-            self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame) - CGRectGetWidth(_showFrom.frame)/2;
+            [self excAlignRight:newFrame];
         }
-            
+            break;
+        case CPAlignStyleAuto:
+        {
+            CGFloat midX0 = CGRectGetMidX(newFrame); // showfrom的中心相对window的坐标x
+            CGFloat minSpace = fminf(CGRectGetWidth(window.bounds) - midX0, midX0);
+            if (minSpace >= 0.5 * CGRectGetWidth(self.containerView.frame)) {
+                // 两边的最小间距 可以居中放下， 同 CPAlignStyleCenter
+                [self excAlignCenter: newFrame];
+            }else if (CGRectGetWidth(window.bounds) - midX0 >= CGRectGetWidth(self.containerView.frame)) {
+                // 右侧距离足够放下， 同CPAlignStyleLeft
+                [self excAlignLeft:newFrame];
+            }else if (midX0 >= CGRectGetWidth(self.containerView.frame)) {
+                // 左侧距离足够放下，同CPAlignStyleRight
+                [self excAlignRight:newFrame];
+            } else {
+                // 整体居中，顶点同showfrom中心对齐
+                CGPoint center = self.containerView.center;
+                center.x = CGRectGetMidX(window.bounds);
+                self.containerView.center = center;
+                
+                // midX0 在 containerView的坐标中的x
+                CGPoint p = [window convertPoint:CGPointMake(midX0, 0) toView:self.containerView];
+                self.containerView.apexOftriangelX = p.x;
+            }
+        }
             break;
             
         default:
@@ -665,6 +677,34 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     }
     
 }
+
+// CPAlignStyleCenter 的布局计算
+- (void)excAlignCenter:(CGRect)showfromFrameBaseWindow
+{
+    CGPoint center = self.containerView.center;
+    center.x = CGRectGetMidX(showfromFrameBaseWindow);
+    self.containerView.center = center;
+    self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame)/2;
+}
+// CPAlignStyleLeft 的布局计算
+- (void)excAlignLeft:(CGRect)showfromFrameBaseWindow
+{
+    CGRect frame = self.containerView.frame;
+    frame.origin.x = CGRectGetMinX(showfromFrameBaseWindow);
+    self.containerView.frame = frame;
+    self.containerView.apexOftriangelX = CGRectGetWidth(_showFrom.frame)/2;
+}
+// CPAlignStyleRight 的布局计算
+- (void)excAlignRight:(CGRect)showfromFrameBaseWindow
+{
+    CGRect frame = self.containerView.frame;
+    frame.origin.x = CGRectGetMinX(showfromFrameBaseWindow) - (fabs(frame.size.width - showfromFrameBaseWindow.size.width));
+    self.containerView.frame = frame;
+    self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame) - CGRectGetWidth(_showFrom.frame)/2;
+}
+
+
+
 
 - (void)layoutSubviews
 {

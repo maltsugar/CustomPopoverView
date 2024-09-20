@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		B94C1B991CD1B22F008EDDF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94C1B971CD1B22F008EDDF7 /* Main.storyboard */; };
 		B94C1B9B1CD1B22F008EDDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B94C1B9A1CD1B22F008EDDF7 /* Assets.xcassets */; };
 		B94C1B9E1CD1B22F008EDDF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94C1B9C1CD1B22F008EDDF7 /* LaunchScreen.storyboard */; };
+		B9EC0BD62C9D0656004E4C8C /* CustomTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EC0BD52C9D0656004E4C8C /* CustomTipView.m */; };
+		B9EC0BD82C9D0662004E4C8C /* CustomTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9EC0BD72C9D0662004E4C8C /* CustomTipView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,9 @@
 		B94C1B9A1CD1B22F008EDDF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B94C1B9D1CD1B22F008EDDF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B94C1B9F1CD1B22F008EDDF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9EC0BD42C9D0656004E4C8C /* CustomTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTipView.h; sourceTree = "<group>"; };
+		B9EC0BD52C9D0656004E4C8C /* CustomTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTipView.m; sourceTree = "<group>"; };
+		B9EC0BD72C9D0662004E4C8C /* CustomTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTipView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +84,9 @@
 				B94C1B921CD1B22F008EDDF7 /* AppDelegate.m */,
 				B94C1B941CD1B22F008EDDF7 /* ViewController.h */,
 				B94C1B951CD1B22F008EDDF7 /* ViewController.m */,
+				B9EC0BD42C9D0656004E4C8C /* CustomTipView.h */,
+				B9EC0BD52C9D0656004E4C8C /* CustomTipView.m */,
+				B9EC0BD72C9D0662004E4C8C /* CustomTipView.xib */,
 				04C86023222FB097004469DC /* CustomNavgationController.h */,
 				04C86024222FB097004469DC /* CustomNavgationController.m */,
 				B94C1B971CD1B22F008EDDF7 /* Main.storyboard */,
@@ -124,20 +132,22 @@
 		B94C1B831CD1B22F008EDDF7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = zgy;
 				TargetAttributes = {
 					B94C1B8A1CD1B22F008EDDF7 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = BJTDMP87P7;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = B94C1B861CD1B22F008EDDF7 /* Build configuration list for PBXProject "CustomPopOverView" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -157,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B94C1B9E1CD1B22F008EDDF7 /* LaunchScreen.storyboard in Resources */,
+				B9EC0BD82C9D0662004E4C8C /* CustomTipView.xib in Resources */,
 				B94C1B9B1CD1B22F008EDDF7 /* Assets.xcassets in Resources */,
 				B94C1B991CD1B22F008EDDF7 /* Main.storyboard in Resources */,
 			);
@@ -172,6 +183,7 @@
 				B94C1B961CD1B22F008EDDF7 /* ViewController.m in Sources */,
 				B94C1B931CD1B22F008EDDF7 /* AppDelegate.m in Sources */,
 				B94C1B901CD1B22F008EDDF7 /* main.m in Sources */,
+				B9EC0BD62C9D0656004E4C8C /* CustomTipView.m in Sources */,
 				040CBF3B222E56460014F9F0 /* CustomPopOverView.m in Sources */,
 				04C86025222FB097004469DC /* CustomNavgationController.m in Sources */,
 			);
@@ -208,13 +220,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -222,6 +245,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -236,7 +260,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -252,13 +276,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -266,6 +301,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -274,7 +310,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -285,10 +321,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BJTDMP87P7;
 				INFOPLIST_FILE = CustomPopOverView/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.ssic.CustomPopOverView;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zgy.popoever;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -297,10 +340,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BJTDMP87P7;
 				INFOPLIST_FILE = CustomPopOverView/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.ssic.CustomPopOverView;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.zgy.popoever;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "CustomPopOverView.h"
-
+#import "CustomTipView.h"
 
 #define RGBCOLOR(r,g,b)		[UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 #define UIColorFromHex(hexValue) [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0xFF00) >> 8))/255.0 blue:((float)(hexValue & 0xFF))/255.0 alpha:1.0]
@@ -230,6 +230,12 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
     
     view.delegate = self;
     [view showFrom:sender alignStyle:CPAlignStyleRight relativePosition:CPContentPositionAutomaticUpFirst];
+}
+
+- (IBAction)handleTest5Click:(UIButton *)sender
+{
+    [CustomTipView showTipViewFrom:sender];
+    
 }
 
 

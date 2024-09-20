@@ -11,6 +11,7 @@ typedef NS_ENUM(NSUInteger, CPAlignStyle) {
     CPAlignStyleCenter,
     CPAlignStyleLeft,
     CPAlignStyleRight,
+    CPAlignStyleAuto // 自动调整箭头位置，中心对齐优先
 };
 
 
