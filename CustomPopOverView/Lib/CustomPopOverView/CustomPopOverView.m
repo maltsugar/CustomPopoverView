@@ -649,6 +649,20 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         case CPAlignStyleAuto:
         {
             CGFloat midX0 = CGRectGetMidX(newFrame); // showfrom的中心相对window的坐标x
+            
+            if (midX0 < 0) {
+                CGFloat w = (CGRectGetMinX(newFrame) + CGRectGetWidth(newFrame));
+                midX0 = 0.5 * w;
+                newFrame.size.width = w;
+                newFrame.origin.x = 0;
+            }else if (midX0 > CGRectGetMaxX(window.bounds)) {
+                CGFloat w = (CGRectGetMaxX(window.bounds) - CGRectGetMinX(newFrame));
+                midX0 = CGRectGetMinX(newFrame) + 0.5 * w;
+                newFrame.size.width = w;
+            }
+            
+            
+            
             CGFloat minSpace = fminf(CGRectGetWidth(window.bounds) - midX0, midX0);
             if (minSpace >= 0.5 * CGRectGetWidth(self.containerView.frame)) {
                 // 两边的最小间距 可以居中放下， 同 CPAlignStyleCenter
@@ -692,7 +706,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     CGRect frame = self.containerView.frame;
     frame.origin.x = CGRectGetMinX(showfromFrameBaseWindow);
     self.containerView.frame = frame;
-    self.containerView.apexOftriangelX = CGRectGetWidth(_showFrom.frame)/2;
+    self.containerView.apexOftriangelX = CGRectGetWidth(showfromFrameBaseWindow)/2;
 }
 // CPAlignStyleRight 的布局计算
 - (void)excAlignRight:(CGRect)showfromFrameBaseWindow
@@ -700,7 +714,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     CGRect frame = self.containerView.frame;
     frame.origin.x = CGRectGetMinX(showfromFrameBaseWindow) - (fabs(frame.size.width - showfromFrameBaseWindow.size.width));
     self.containerView.frame = frame;
-    self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame) - CGRectGetWidth(_showFrom.frame)/2;
+    self.containerView.apexOftriangelX = CGRectGetWidth(self.containerView.frame) - CGRectGetWidth(showfromFrameBaseWindow)/2;
 }
 
 

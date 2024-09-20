@@ -239,6 +239,12 @@ dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((_seconds_) * NSEC_PER
 }
 
 
+- (IBAction)handleLongBtnAction:(UIButton *)sender 
+{
+    [CustomTipView showTipViewFrom:sender];
+}
+
+
 
 
 

@@ -58,7 +58,7 @@
                                 <rect key="frame" x="0.0" y="194" width="375" height="224.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lkB-WS-aK7" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="2000" height="224.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="3000" height="224.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HorizontalScrollView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hda-jv-GKh">
                                                 <rect key="frame" x="20" y="94.5" width="266.5" height="36"/>
@@ -74,13 +74,27 @@
                                                     <action selector="handleTest5Click:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Ac-I3-ytq"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cv-KY-hpN">
+                                                <rect key="frame" x="1158.5" y="95.5" width="150" height="34"/>
+                                                <color key="backgroundColor" red="1" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="kq6-3c-qIs"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="long long long"/>
+                                                <connections>
+                                                    <action selector="handleLongBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bCO-Gb-4yu"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="0.34853461648331208" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="7Cv-KY-hpN" firstAttribute="leading" secondItem="VxQ-Vc-pql" secondAttribute="trailing" constant="60" id="0iz-vI-8th"/>
                                             <constraint firstItem="Hda-jv-GKh" firstAttribute="leading" secondItem="lkB-WS-aK7" secondAttribute="leading" constant="20" id="51J-es-ApF"/>
                                             <constraint firstItem="Hda-jv-GKh" firstAttribute="centerY" secondItem="lkB-WS-aK7" secondAttribute="centerY" id="V2i-o9-JfR"/>
-                                            <constraint firstAttribute="width" constant="2000" id="abN-cE-Xfe"/>
+                                            <constraint firstAttribute="width" constant="3000" id="abN-cE-Xfe"/>
                                             <constraint firstItem="VxQ-Vc-pql" firstAttribute="centerY" secondItem="lkB-WS-aK7" secondAttribute="centerY" id="l9A-5L-6fd"/>
+                                            <constraint firstItem="7Cv-KY-hpN" firstAttribute="centerY" secondItem="VxQ-Vc-pql" secondAttribute="centerY" id="uAv-AO-nbz"/>
                                             <constraint firstItem="VxQ-Vc-pql" firstAttribute="leading" secondItem="Hda-jv-GKh" secondAttribute="trailing" constant="800" id="y8D-dw-GR6"/>
                                         </constraints>
                                     </view>
