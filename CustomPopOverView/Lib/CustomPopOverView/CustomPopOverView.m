@@ -649,13 +649,12 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         case CPAlignStyleAuto:
         {
             CGFloat midX0 = CGRectGetMidX(newFrame); // showfrom的中心相对window的坐标x
-            
-            if (midX0 < 0) {
+            if (CGRectGetMinX(newFrame) < 0) {
                 CGFloat w = (CGRectGetMinX(newFrame) + CGRectGetWidth(newFrame));
                 midX0 = 0.5 * w;
                 newFrame.size.width = w;
                 newFrame.origin.x = 0;
-            }else if (midX0 > CGRectGetMaxX(window.bounds)) {
+            }else if (CGRectGetMaxX(newFrame) > CGRectGetMaxX(window.bounds)) {
                 CGFloat w = (CGRectGetMaxX(window.bounds) - CGRectGetMinX(newFrame));
                 midX0 = CGRectGetMinX(newFrame) + 0.5 * w;
                 newFrame.size.width = w;
@@ -674,7 +673,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
                 // 左侧距离足够放下，同CPAlignStyleRight
                 [self excAlignRight:newFrame];
             } else {
-                // 整体居中，顶点同showfrom中心对齐
+                // 整体居中，顶点同showfrom显示在屏幕部分的中心对齐
                 CGPoint center = self.containerView.center;
                 center.x = CGRectGetMidX(window.bounds);
                 self.containerView.center = center;
