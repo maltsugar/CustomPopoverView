@@ -19,7 +19,7 @@
 {
     NSArray *arr = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil];
     CustomTipView *tipView = [arr lastObject];
-    tipView.bounds = CGRectMake(0, 0, 370, 166);
+    tipView.bounds = CGRectMake(0, 0, 300, 211);
     tipView.layer.cornerRadius = 5;
     tipView.clipsToBounds = YES;
     

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 typedef NS_ENUM(NSUInteger, CPAlignStyle) {
+    CPAlignStyleAuto, // 自动调整箭头位置，中心对齐优先
     CPAlignStyleCenter,
     CPAlignStyleLeft,
     CPAlignStyleRight,
-    CPAlignStyleAuto // 自动调整箭头位置，中心对齐优先
 };
 
 

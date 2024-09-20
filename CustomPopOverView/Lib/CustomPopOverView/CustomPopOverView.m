@@ -631,21 +631,6 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
     
     
     switch (_alignStyle) {
-        case CPAlignStyleCenter:
-        {
-            [self excAlignCenter:newFrame];
-        }
-            break;
-        case CPAlignStyleLeft:
-        {
-            [self excAlignLeft:newFrame];
-        }
-            break;
-        case CPAlignStyleRight:
-        {
-            [self excAlignRight:newFrame];
-        }
-            break;
         case CPAlignStyleAuto:
         {
             CGFloat midX0 = CGRectGetMidX(newFrame); // showfrom的中心相对window的坐标x
@@ -682,6 +667,21 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
                 CGPoint p = [window convertPoint:CGPointMake(midX0, 0) toView:self.containerView];
                 self.containerView.apexOftriangelX = p.x;
             }
+        }
+            break;
+        case CPAlignStyleCenter:
+        {
+            [self excAlignCenter:newFrame];
+        }
+            break;
+        case CPAlignStyleLeft:
+        {
+            [self excAlignLeft:newFrame];
+        }
+            break;
+        case CPAlignStyleRight:
+        {
+            [self excAlignRight:newFrame];
         }
             break;
             

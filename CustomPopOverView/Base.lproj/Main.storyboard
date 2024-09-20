@@ -75,13 +75,18 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cv-KY-hpN">
-                                                <rect key="frame" x="1158.5" y="95.5" width="150" height="34"/>
+                                                <rect key="frame" x="1158.5" y="147.5" width="286" height="30"/>
                                                 <color key="backgroundColor" red="1" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="kq6-3c-qIs"/>
-                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="long long long"/>
+                                                <state key="normal" title="very long title button test"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="handleLongBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bCO-Gb-4yu"/>
                                                 </connections>
@@ -93,8 +98,9 @@
                                             <constraint firstItem="Hda-jv-GKh" firstAttribute="leading" secondItem="lkB-WS-aK7" secondAttribute="leading" constant="20" id="51J-es-ApF"/>
                                             <constraint firstItem="Hda-jv-GKh" firstAttribute="centerY" secondItem="lkB-WS-aK7" secondAttribute="centerY" id="V2i-o9-JfR"/>
                                             <constraint firstAttribute="width" constant="3000" id="abN-cE-Xfe"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Cv-KY-hpN" secondAttribute="trailing" constant="20" symbolic="YES" id="kv7-wf-ruZ"/>
                                             <constraint firstItem="VxQ-Vc-pql" firstAttribute="centerY" secondItem="lkB-WS-aK7" secondAttribute="centerY" id="l9A-5L-6fd"/>
-                                            <constraint firstItem="7Cv-KY-hpN" firstAttribute="centerY" secondItem="VxQ-Vc-pql" secondAttribute="centerY" id="uAv-AO-nbz"/>
+                                            <constraint firstItem="7Cv-KY-hpN" firstAttribute="centerY" secondItem="VxQ-Vc-pql" secondAttribute="centerY" constant="50" id="uAv-AO-nbz"/>
                                             <constraint firstItem="VxQ-Vc-pql" firstAttribute="leading" secondItem="Hda-jv-GKh" secondAttribute="trailing" constant="800" id="y8D-dw-GR6"/>
                                         </constraints>
                                     </view>
