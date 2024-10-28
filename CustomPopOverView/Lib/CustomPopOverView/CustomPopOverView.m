@@ -507,7 +507,7 @@ static NSString* _dimissAnimationKey = @"_dimissAnimation";
         [self.containerView.layer addAnimation:group forKey:_dimissAnimationKey];
         
         [UIView animateWithDuration:_style.animationDuration delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.alpha = 0.1;
+            self.alpha = 0;
         } completion:nil];
         
     }else
